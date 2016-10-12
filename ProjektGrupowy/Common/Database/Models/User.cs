@@ -1,4 +1,6 @@
-﻿namespace Database.Models
+﻿using Enums;
+
+namespace Database.Models
 {
     public class User
     {
@@ -14,6 +16,6 @@
 
         public virtual string Surname { get; set; }
 
-        public virtual int AccountType { get; set; }
+        public virtual AccountType AccountType { get; set; }
     }
 }
