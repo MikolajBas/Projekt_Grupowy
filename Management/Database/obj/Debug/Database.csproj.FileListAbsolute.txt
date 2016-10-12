@@ -1,0 +1,11 @@
+C:\Users\sosna\OneDrive\Dokumenty\Projects\ProjektGrupowy\Management\Database\bin\Debug\Database.dll
+C:\Users\sosna\OneDrive\Dokumenty\Projects\ProjektGrupowy\Management\Database\bin\Debug\Database.pdb
+C:\Users\sosna\OneDrive\Dokumenty\Projects\ProjektGrupowy\Management\Database\bin\Debug\FluentNHibernate.dll
+C:\Users\sosna\OneDrive\Dokumenty\Projects\ProjektGrupowy\Management\Database\bin\Debug\Iesi.Collections.dll
+C:\Users\sosna\OneDrive\Dokumenty\Projects\ProjektGrupowy\Management\Database\bin\Debug\NHibernate.dll
+C:\Users\sosna\OneDrive\Dokumenty\Projects\ProjektGrupowy\Management\Database\bin\Debug\FluentNHibernate.pdb
+C:\Users\sosna\OneDrive\Dokumenty\Projects\ProjektGrupowy\Management\Database\bin\Debug\FluentNHibernate.xml
+C:\Users\sosna\OneDrive\Dokumenty\Projects\ProjektGrupowy\Management\Database\bin\Debug\Iesi.Collections.xml
+C:\Users\sosna\OneDrive\Dokumenty\Projects\ProjektGrupowy\Management\Database\bin\Debug\NHibernate.xml
+C:\Users\sosna\OneDrive\Dokumenty\Projects\ProjektGrupowy\Management\Database\obj\Debug\Database.dll
+C:\Users\sosna\OneDrive\Dokumenty\Projects\ProjektGrupowy\Management\Database\obj\Debug\Database.pdb

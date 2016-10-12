@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Management", "Management\Ma
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Management.Tests", "Management.Tests\Management.Tests.csproj", "{9415A127-7338-4A69-A498-6F2BB1FF9305}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web Services", "Web Services", "{0E487B82-0AF6-4297-AAD1-3F6EE18F54B5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{A2AF542D-9210-4D5F-9FA0-D71D04011DF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{ABEC7331-50AC-4EF8-B25A-D1754E11BB67}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +27,15 @@ Global
 		{9415A127-7338-4A69-A498-6F2BB1FF9305}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9415A127-7338-4A69-A498-6F2BB1FF9305}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9415A127-7338-4A69-A498-6F2BB1FF9305}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABEC7331-50AC-4EF8-B25A-D1754E11BB67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABEC7331-50AC-4EF8-B25A-D1754E11BB67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABEC7331-50AC-4EF8-B25A-D1754E11BB67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABEC7331-50AC-4EF8-B25A-D1754E11BB67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ABEC7331-50AC-4EF8-B25A-D1754E11BB67} = {A2AF542D-9210-4D5F-9FA0-D71D04011DF9}
 	EndGlobalSection
 EndGlobal
