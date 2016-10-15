@@ -12,10 +12,14 @@ DROP TABLE IF EXISTS `sites_tags`;
 DROP TABLE IF EXISTS `sites_visits`;
 
 CREATE TABLE users(
+   id INT NOT NULL AUTO_INCREMENT,
    login VARCHAR(32) NOT NULL,
    password VARCHAR(128) NOT NULL,
-   account_type VARCHAR(32) NOT NULL,
-   PRIMARY KEY ( login )
+   email VARCHAR(128) NOT NULL,
+   name VARCHAR(32) NOT NULL,
+   surname VARCHAR(128) NOT NULL,
+   account_type INT NOT NULL,
+   PRIMARY KEY ( id )
 );
 
 CREATE TABLE visitors(

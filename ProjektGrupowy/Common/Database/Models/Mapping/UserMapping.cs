@@ -6,7 +6,7 @@ namespace Database.Models.Mapping
     {
         public UserMapping()
         {
-            Table("user");
+            Table("users");
             Id(x => x.Id).Not.Nullable().Column("id");
             Map(x => x.Login).Not.Nullable().Column("login");
             Map(x => x.Password).Not.Nullable().Column("password");
