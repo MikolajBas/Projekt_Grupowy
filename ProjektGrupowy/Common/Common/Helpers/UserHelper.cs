@@ -1,10 +1,10 @@
 ﻿using Database;
 using Database.Models;
-using Enums;
+using Data.Enums;
 using NHibernate.Linq;
 using System.Linq;
 
-namespace Common
+namespace Common.Helpers
 {
     public static class UserHelper
     {

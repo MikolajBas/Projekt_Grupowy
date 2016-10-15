@@ -52,7 +52,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UserHelper.cs" />
+    <Compile Include="Helpers\UserHelper.cs" />
+    <Compile Include="Serializers\DataSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -63,9 +64,9 @@
       <Project>{abec7331-50ac-4ef8-b25a-d1754e11bb67}</Project>
       <Name>Database</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Enums\Enums.csproj">
-      <Project>{2fd3c104-4b2f-45a2-8260-f863af6d821e}</Project>
-      <Name>Enums</Name>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{7ca6e62c-a9aa-48cb-b0c3-08d7eca916e9}</Project>
+      <Name>Data</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
