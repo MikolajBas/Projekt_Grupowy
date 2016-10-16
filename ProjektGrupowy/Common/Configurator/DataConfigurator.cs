@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Configurator
 {
-    public class Class1
+    public class DataConfigurator
     {
     }
 }
