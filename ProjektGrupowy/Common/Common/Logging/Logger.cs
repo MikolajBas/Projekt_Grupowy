@@ -29,6 +29,17 @@ namespace Common.Logging
             Log(string.Format("{0}-Error.txt", _fileName), log);
         }
 
+        public void Error(Exception ex)
+        {
+            Error(string.Format("Exception message: {1}", ex));
+        }
+
+        public void Error(string log, Exception ex)
+        {
+            Error(string.Format("{0}. Exception message: {1}", log, ex));
+        }
+
+
         public void Log(string filename, string log)
         {
             var path = _directory + filename;
