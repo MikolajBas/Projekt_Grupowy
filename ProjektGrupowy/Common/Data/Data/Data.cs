@@ -2,13 +2,28 @@
 
 namespace Data.Data
 {
-    [XmlRoot("Data")]
     public class Data
     {
-        [XmlElement("Ip")]
-        public string ip;
+        public string Ip;
+        
+        public string Url;
 
-        [XmlElement("Url")]
-        public string url;
+        public string Browser;
+
+        public string System;
+
+        public string ScreenResolution;
+        
+        public string Agent; //desktop/mobile
+
+        public string userGuid;
+
+        public string Category;
+
+        public int ProductId;
+
+        public string ProductName;
+
+        public string Price;
     }
 }
