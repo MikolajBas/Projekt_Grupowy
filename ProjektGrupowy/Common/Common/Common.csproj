@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\TextHelper.cs" />
     <Compile Include="Helpers\UserHelper.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Serializers\DataSerializer.cs" />
