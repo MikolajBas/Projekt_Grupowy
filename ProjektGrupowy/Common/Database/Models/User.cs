@@ -4,18 +4,22 @@ namespace Database.Models
 {
     public class User
     {
-        public virtual int Id { get; set; }
+        public int Id { get; set; }
 
-        public virtual string Login { get; set; }
+        public string Login { get; set; }
 
-        public virtual string Password { get; set; }
+        public string Password { get; set; }
 
-        public virtual string Email { get; set; }
+        public string Email { get; set; }
 
-        public virtual string Name { get; set; }
+        public string Name { get; set; }
 
-        public virtual string Surname { get; set; }
+        public string Surname { get; set; }
 
-        public virtual AccountType AccountType { get; set; }
+        public string Url { get; set; }
+
+        public AccountType AccountType { get; set; }
+
+        public string Guid { get; set; }
     }
 }
