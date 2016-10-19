@@ -57,6 +57,47 @@ namespace Configurator
             return configurations;
         }
 
+        public bool IsConfigurationValid(int userId, string name, string value)
+        {
+            var config = new DataPropertiesConfiguration();
+
+            using (var session = Connector.OpenSession())
+            using (var transaction = session.BeginTransaction())
+            {
+                config = session.Query<DataPropertiesConfiguration>().FirstOrDefault(x => x.UserId == userId && x.Name == name);
+                transaction.Commit();
+            }
+
+            if (config == null)
+            {
+                return false;
+            }
+
+            return TryParsePropertyType(config.TypeId, value);
+        }
+
+        public bool TryParsePropertyType(int typeId, string value)
+        {
+            var type = (PropertyType)typeId;
+
+            switch (type)
+            {
+                case PropertyType.DateTime:
+                    DateTime time = new DateTime();
+                    return DateTime.TryParse(value, out time);
+
+                case PropertyType.Int:
+                    int i = 0;
+                    return int.TryParse(value, out i);
+
+                case PropertyType.String:
+                    return true;
+
+                default:
+                    return false;
+            }
+        }
+
         public void AddDataCategory(string name, int categoryId, int userId)
         {
             using (var session = Connector.OpenSession())
@@ -97,6 +138,25 @@ namespace Configurator
                 throw new Exception("No categories found");
 
             return categories;
+        }
+
+        public bool IsCategoryValid(int userId, string name)
+        {
+            var category = new DataCategory();
+
+            using (var session = Connector.OpenSession())
+            using (var transaction = session.BeginTransaction())
+            {
+                category = session.Query<DataCategory>().FirstOrDefault(x => x.UserId == userId && x.Name == name);
+                transaction.Commit();
+            }
+
+            if (category == null)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
