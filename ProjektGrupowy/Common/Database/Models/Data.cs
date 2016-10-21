@@ -18,7 +18,7 @@ namespace Database.Models
 
         public string Agent { get; set; } //desktop/mobile
 
-        public int userId { get; set; }
+        public int UserId { get; set; }
 
         public int CategoryId { get; set; }
 
