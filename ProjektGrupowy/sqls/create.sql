@@ -1,15 +1,17 @@
-CREATE DATABASE IF NOT EXISTS pg;
+CREATE DATABASE IF NOT EXISTS dotnot;
 
-USE pg;
+USE dotnot;
 
 DROP TABLE IF EXISTS `users`;
-DROP TABLE IF EXISTS `visitors`;
-DROP TABLE IF EXISTS `tags`;
-DROP TABLE IF EXISTS `locations`;
-DROP TABLE IF EXISTS `sites`;
-DROP TABLE IF EXISTS `visits`;
-DROP TABLE IF EXISTS `sites_tags`;
-DROP TABLE IF EXISTS `sites_visits`;
+DROP TABLE IF EXISTS `sites_data`;
+DROP TABLE IF EXISTS `data_categories`;
+DROP TABLE IF EXISTS `data_property_configurations`;
+DROP TABLE IF EXISTS `data_properties`;
+DROP TABLE IF EXISTS `event_configurations`;
+DROP TABLE IF EXISTS `event_configuration_properties`;
+DROP TABLE IF EXISTS `event_logs`;
+DROP TABLE IF EXISTS `notifications`;
+DROP TABLE IF EXISTS `notification_configurations`;
 
 CREATE TABLE users(
    id INT NOT NULL AUTO_INCREMENT,
@@ -22,59 +24,114 @@ CREATE TABLE users(
    PRIMARY KEY ( id )
 );
 
-CREATE TABLE visitors(
-   ip_address VARCHAR(32) NOT NULL,
-   PRIMARY KEY ( ip_address )
-);
-
-CREATE TABLE tags(
+CREATE TABLE sites_data(
    id INT NOT NULL AUTO_INCREMENT,
-   tagname VARCHAR(32) NOT NULL,
+   ip VARCHAR(32) NOT NULL,
+   url VARCHAR(128) NOT NULL,
+   browser VARCHAR(128),
+   system VARCHAR(32),
+   screen_resolution VARCHAR(128),
+   agent VARCHAR(32),
+   product_name VARCHAR(64),
+   product_id INT,
+   user_id INT NOT NULL,
+   category_id INT NOT NULL,
+   visit_date DATETIME,
+   FOREIGN KEY (user_id) REFERENCES users(id),
+   FOREIGN KEY (category_id) REFERENCES data_categories(id),
    PRIMARY KEY ( id )
 );
 
-CREATE TABLE locations(
+CREATE TABLE data_categories(
    id INT NOT NULL AUTO_INCREMENT,
-   country VARCHAR(32),
-   city VARCHAR(32),
-   coords VARCHAR(100) NOT NULL,
+   name VARCHAR(32) NOT NULL,
+   category_id INT NOT NULL,
+   user_id INT NOT NULL,
+   FOREIGN KEY (user_id) REFERENCES users(id),
    PRIMARY KEY ( id )
 );
 
-CREATE TABLE sites(
+CREATE TABLE data_property_configurations(
    id INT NOT NULL AUTO_INCREMENT,
-   full_name VARCHAR(100) NOT NULL,
-   domain_name VARCHAR(64) NOT NULL,
-   submission_date DATE,
+   name VARCHAR(32) NOT NULL,
+   type_id INT NOT NULL,
+   user_id INT NOT NULL,
+   FOREIGN KEY (user_id) REFERENCES users(id),
    PRIMARY KEY ( id )
 );
 
-CREATE TABLE visits(
+CREATE TABLE data_properties(
    id INT NOT NULL AUTO_INCREMENT,
-   duration LONG NOT NULL,
-   visit_date DATE NOT NULL,
-   location INT NOT NULL,
-   visitor VARCHAR(32) NOT NULL,
-   FOREIGN KEY (visitor) REFERENCES visitors(ip_address),
-   FOREIGN KEY (location) REFERENCES locations(id),
+   property_value VARCHAR(32) NOT NULL,
+   property_id INT NOT NULL,
+   data_id INT NOT NULL,
+   FOREIGN KEY (data_id) REFERENCES sites_data(id),
    PRIMARY KEY ( id )
 );
 
-CREATE TABLE sites_visits(
+CREATE TABLE event_configurations(
    id INT NOT NULL AUTO_INCREMENT,
-   site INT NOT NULL,
-   visit INT NOT NULL,
-   FOREIGN KEY (site) REFERENCES sites(id),
-   FOREIGN KEY (visit) REFERENCES visits(id),
+   property_id INT NOT NULL,
+   property_value VARCHAR(32) NOT NULL,
+   event_operator VARCHAR(32) NOT NULL,
+   result_value INT NOT NULL,
+   event_function VARCHAR(32),
+   period INT NOT NULL,
+   template VARCHAR(64),
+   user_id INT NOT NULL,
+   category_id INT NOT NULL,
+   FOREIGN KEY (user_id) REFERENCES users(id),
+   FOREIGN KEY (property_id) REFERENCES data_properties_configuration(id),
+   FOREIGN KEY (category_id) REFERENCES event_configurations(id),
    PRIMARY KEY ( id )
 );
 
-CREATE TABLE sites_tags(
+CREATE TABLE event_configuration_properties(
    id INT NOT NULL AUTO_INCREMENT,
-   site INT NOT NULL,
-   tag INT NOT NULL,
-   FOREIGN KEY (site) REFERENCES sites(id),
-   FOREIGN KEY (tag) REFERENCES tags(id),
+   property_id INT NOT NULL,
+   event_configuration_id INT NOT NULL,
+   position INT NOT NULL,
+   FOREIGN KEY (event_configuration_id) REFERENCES event_configurations(id),
+   PRIMARY KEY ( id )
+);
+
+CREATE TABLE event_logs(
+   id INT NOT NULL AUTO_INCREMENT,
+   ip VARCHAR(32) NOT NULL,
+   user_id INT NOT NULL,
+   event_configuration_id INT NOT NULL,
+   event_date DATETIME NOT NULL,
+   FOREIGN KEY (user_id) REFERENCES users(id),
+   FOREIGN KEY (event_configuration_id) REFERENCES event_configurations(id),
+   PRIMARY KEY ( id )
+);
+
+CREATE TABLE notifications(
+   id INT NOT NULL AUTO_INCREMENT,
+   message VARCHAR(64) NOT NULL,
+   user_id INT NOT NULL,
+   notification_configuration_id INT NOT NULL,
+   notification_date DATETIME NOT NULL,
+   FOREIGN KEY (user_id) REFERENCES users(id),
+   FOREIGN KEY (notification_configuration_id) REFERENCES notification_configurations(id),
+   PRIMARY KEY ( id )
+);
+
+CREATE TABLE notification_configurations(
+   id INT NOT NULL AUTO_INCREMENT,
+   property_id INT NOT NULL,
+   property_operator_id INT NOT NULL,
+   property_value VARCHAR(32) NOT NULL,
+   operator_id VARCHAR(32) NOT NULL,
+   result_value VARCHAR(32) NOT NULL,
+   function_id VARCHAR(32),
+   period INT NOT NULL,
+   message VARCHAR(64),
+   user_id INT NOT NULL,
+   category_id INT NOT NULL,
+   FOREIGN KEY (user_id) REFERENCES users(id),
+   FOREIGN KEY (property_id) REFERENCES data_properties_configuration(id),
+   FOREIGN KEY (category_id) REFERENCES event_configurations(id),
    PRIMARY KEY ( id )
 );
 
