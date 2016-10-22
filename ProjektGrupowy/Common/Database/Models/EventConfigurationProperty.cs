@@ -6,7 +6,7 @@
 
         public int EventConfigurationId { get; set; }
 
-        public int position { get; set; }
+        public int Position { get; set; }
 
         public int PropertyId { get; set; }
     }

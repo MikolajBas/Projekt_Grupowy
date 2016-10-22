@@ -14,7 +14,7 @@
 
         public int ResultValue { get; set; }
 
-        public int Function { get; set; }
+        public string Function { get; set; }
 
         public int Period { get; set; } //number of days
 
