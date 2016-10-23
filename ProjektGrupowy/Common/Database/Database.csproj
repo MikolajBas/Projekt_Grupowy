@@ -60,6 +60,15 @@
     <Compile Include="Models\EventConfiguration.cs" />
     <Compile Include="Models\EventConfigurationProperty.cs" />
     <Compile Include="Models\EventLog.cs" />
+    <Compile Include="Models\Mapping\DataCategoryMapping.cs" />
+    <Compile Include="Models\Mapping\DataMapping.cs" />
+    <Compile Include="Models\Mapping\DataPropertiesConfigurationMapping.cs" />
+    <Compile Include="Models\Mapping\DataPropertyMapping.cs" />
+    <Compile Include="Models\Mapping\EventConfigurationMapping.cs" />
+    <Compile Include="Models\Mapping\EventConfigurationPropertyMapping.cs" />
+    <Compile Include="Models\Mapping\EventLogMapping.cs" />
+    <Compile Include="Models\Mapping\NotificationConfigurationMapping.cs" />
+    <Compile Include="Models\Mapping\NotificationMapping.cs" />
     <Compile Include="Models\Mapping\UserMapping.cs" />
     <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\NotificationConfiguration.cs" />
