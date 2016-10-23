@@ -2,12 +2,12 @@
 {
     public class DataProperty
     {
-        public int Id { get; set; }
+        public virtual int Id { get; set; }
 
-        public int PropertyId { get; set; }
+        public virtual int PropertyId { get; set; }
 
-        public string Value { get; set; }
+        public virtual string Value { get; set; }
 
-        public int DataId { get; set; }
+        public virtual int DataId { get; set; }
     }
 }

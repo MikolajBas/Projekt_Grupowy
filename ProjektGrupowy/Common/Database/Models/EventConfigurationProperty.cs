@@ -2,12 +2,12 @@
 {
     public class EventConfigurationProperty
     {
-        public int Id { get; set; }
+        public virtual int Id { get; set; }
 
-        public int EventConfigurationId { get; set; }
+        public virtual int EventConfigurationId { get; set; }
 
-        public int Position { get; set; }
+        public virtual int Position { get; set; }
 
-        public int PropertyId { get; set; }
+        public virtual int PropertyId { get; set; }
     }
 }

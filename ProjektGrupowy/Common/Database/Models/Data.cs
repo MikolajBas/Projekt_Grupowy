@@ -4,28 +4,28 @@ namespace Database.Models
 {
     public class Data
     {
-        public int Id { get; set; }
+        public virtual int Id { get; set; }
 
-        public string Ip { get; set; }
+        public virtual string Ip { get; set; }
 
-        public string Url { get; set; }
+        public virtual string Url { get; set; }
 
-        public string Browser { get; set; }
+        public virtual string Browser { get; set; }
 
-        public string System { get; set; }
+        public virtual string System { get; set; }
 
-        public string ScreenResolution { get; set; }
+        public virtual string ScreenResolution { get; set; }
 
-        public string Agent { get; set; } //desktop/mobile
+        public virtual string Agent { get; set; } //desktop/mobile
 
-        public int UserId { get; set; }
+        public virtual int UserId { get; set; }
 
-        public int CategoryId { get; set; }
+        public virtual int CategoryId { get; set; }
 
-        public int ProductId { get; set; }
+        public virtual int ProductId { get; set; }
 
-        public string ProductName { get; set; }
+        public virtual string ProductName { get; set; }
 
-        public DateTime Date { get; set; }
+        public virtual DateTime Date { get; set; }
     }
 }

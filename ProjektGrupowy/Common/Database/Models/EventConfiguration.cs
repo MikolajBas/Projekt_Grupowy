@@ -2,26 +2,26 @@
 {
     public class EventConfiguration
     {
-        public int Id { get; set; }
+        public virtual int Id { get; set; }
 
-        public int PropertyId { get; set; }
+        public virtual int PropertyId { get; set; }
 
-        public string PropertyOperator { get; set; }
+        public virtual string PropertyOperator { get; set; }
 
-        public string PropertyValue { get; set; }
+        public virtual string PropertyValue { get; set; }
 
-        public string Operator { get; set; }
+        public virtual string Operator { get; set; }
 
-        public int ResultValue { get; set; }
+        public virtual int ResultValue { get; set; }
 
-        public string Function { get; set; }
+        public virtual string Function { get; set; }
 
-        public int Period { get; set; } //number of days
+        public virtual int Period { get; set; } //number of days
 
-        public int UserId { get; set; }
+        public virtual int UserId { get; set; }
 
-        public string Template { get; set; }
+        public virtual string Template { get; set; }
 
-        public int CategoryId { get; set; }
+        public virtual int CategoryId { get; set; }
     }
 }

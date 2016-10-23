@@ -2,24 +2,24 @@
 {
     public class NotificationConfiguration
     {
-        public int Id { get; set; }
+        public virtual int Id { get; set; }
 
-        public int PropertyId { get; set; }
+        public virtual int PropertyId { get; set; }
 
-        public int PropertyOperatorId { get; set; }
+        public virtual int PropertyOperatorId { get; set; }
 
-        public string PropertyValue { get; set; }
+        public virtual string PropertyValue { get; set; }
 
-        public int OperatorId { get; set; }
+        public virtual int OperatorId { get; set; }
 
-        public string ResultValue { get; set; }
+        public virtual string ResultValue { get; set; }
 
-        public int FunctionId { get; set; }
+        public virtual int FunctionId { get; set; }
 
-        public int Period { get; set; } //number of days
+        public virtual int Period { get; set; } //number of days
 
-        public int UserId { get; set; }
+        public virtual int UserId { get; set; }
 
-        public string Message { get; set; }
+        public virtual string Message { get; set; }
     }
 }
