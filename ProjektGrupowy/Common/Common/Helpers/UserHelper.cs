@@ -134,5 +134,28 @@ namespace Common.Helpers
                 throw ex;
             }
         }
+
+        public static User GetUserByGuid(ISession session, string guid)
+        {
+            try
+            {
+                var user = session.Query<User>().FirstOrDefault(x => x.Guid == guid);
+                
+                if (user != null)
+                {
+                    return user;
+                }
+                else
+                {
+                    throw new Exception(string.Format("No user found with guid: {0}", guid));
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+
+                throw ex;
+            }
+        }
     }
 }
