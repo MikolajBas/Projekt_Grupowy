@@ -205,9 +205,24 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Basic\AddPhoneNumberViewModel.cs" />
+    <Compile Include="Models\Basic\ChangePasswordViewModel.cs" />
+    <Compile Include="Models\Basic\ConfigureTwoFactorViewModel.cs" />
+    <Compile Include="Models\Basic\ExternalLoginConfirmationViewModel.cs" />
+    <Compile Include="Models\Basic\ExternalLoginListViewModel.cs" />
+    <Compile Include="Models\Basic\FactorViewModel.cs" />
+    <Compile Include="Models\Basic\ForgotPasswordViewModel.cs" />
+    <Compile Include="Models\Basic\ForgotViewModel.cs" />
+    <Compile Include="Models\Basic\IdentityModels.cs" />
+    <Compile Include="Models\Basic\IndexViewModel.cs" />
+    <Compile Include="Models\Basic\LoginViewModel.cs" />
+    <Compile Include="Models\Basic\ManageLoginsViewModel.cs" />
+    <Compile Include="Models\Basic\RegisterViewModel.cs" />
+    <Compile Include="Models\Basic\ResetPasswordViewModel.cs" />
+    <Compile Include="Models\Basic\SendCodeViewModel.cs" />
+    <Compile Include="Models\Basic\SetPasswordViewModel.cs" />
+    <Compile Include="Models\Basic\VerifyCodeViewModel.cs" />
+    <Compile Include="Models\Basic\VerifyPhoneNumberViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
