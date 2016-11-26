@@ -1,4 +1,5 @@
 ﻿using Common.Helpers;
+using Common.Managers;
 using Common.Serializers;
 using Configurator;
 using Database;
@@ -16,11 +17,19 @@ namespace CollectorService
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class CollectorService
     {
-        // To use HTTP GET, add [WebGet] attribute. (Default ResponseFormat is WebMessageFormat.Json)
-        // To create an operation that returns XML,
-        //     add [WebGet(ResponseFormat=WebMessageFormat.Xml)],
-        //     and include the following line in the operation body:
-        //         WebOperationContext.Current.OutgoingResponse.ContentType = "text/xml";
+        private UserManager _userManager;
+        public UserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? new UserManager();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
         [OperationContract]
         public void Collect(string jsonData, string jsonDataProperties, string userGuid)
         {
@@ -49,8 +58,8 @@ namespace CollectorService
             using (var transaction = session.BeginTransaction())
             {
                 var configurator = new EventConfigurator();
-
-                var userId = UserHelper.GetUserByGuid(session, userGuid).Id;
+                
+                var userId = UserManager.GetUserByGuid(session, userGuid).Id;
                 
                 var configs = session.Query<EventConfiguration>().Where(x => x.UserId == userId);
 

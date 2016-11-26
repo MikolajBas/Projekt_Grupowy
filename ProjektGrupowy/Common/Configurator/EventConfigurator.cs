@@ -40,10 +40,10 @@ namespace Configurator
                     where
                         d.user_id = {1} and
                         d.ip = {2} and
-                        d.category_id = {3} and
+                        d.category = {3} and
                         dp.property_id = {4} and
                         dp.value {5} {6};",
-                        config.Function, config.UserId, ip, config.CategoryId, config.PropertyId, config.PropertyOperator, config.PropertyValue))
+                        config.Function, config.UserId, ip, config.Category, config.PropertyId, config.PropertyOperator, config.PropertyValue))
                         .AddEntity(typeof(int));
 
             return query.List<int>().First();
@@ -72,10 +72,10 @@ namespace Configurator
                     on
                         d.id = dp.data_id
                     where
-                        d.category_id = {0} and
+                        d.category = {0} and
                         dp.property_id = {1} and
                         dp.value between {2} and {3};",
-                config.CategoryId, config.PropertyId, min, max))
+                config.Category, config.PropertyId, min, max))
                 .AddEntity(typeof(int)).List<int>();
             }
             else
@@ -90,10 +90,10 @@ namespace Configurator
                     on
                         d.id = dp.data_id
                     where
-                        d.category_id = {0} and
+                        d.category = {0} and
                         dp.property_id = {1} and
                         dp.value = {2}",
-                config.CategoryId, config.PropertyId, config.PropertyValue))
+                config.Category, config.PropertyId, config.PropertyValue))
                 .AddEntity(typeof(int)).List<int>();
             }
 
@@ -148,7 +148,7 @@ on
 where
     d.user_id = 1 and
     d.ip = '127.0.0.1' and
-    d.category_id = 1 and
+    d.category = 'aa' and
     dp.property_id = 1 and
     dp.value > 10;
 

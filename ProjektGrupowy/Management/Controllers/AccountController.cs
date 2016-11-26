@@ -1,7 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -9,24 +6,17 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Management.Models;
+using Common.Managers;
+using Data.Enums;
 
 namespace Management.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
-        private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
-
-        public AccountController()
-        {
-        }
-
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
-        {
-            UserManager = userManager;
-            SignInManager = signInManager;
-        }
+        private ApplicationSignInManager _signInManager; //to remove
+        private ApplicationUserManager _userManager; //to remove
+        private AccountManager _accountManager;
 
         public ApplicationSignInManager SignInManager
         {
@@ -34,9 +24,9 @@ namespace Management.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -49,6 +39,27 @@ namespace Management.Controllers
             private set
             {
                 _userManager = value;
+            }
+        }
+
+        public AccountController()
+        {
+        }
+
+        public AccountController(AccountManager accountManager)
+        {
+            AccountManager = accountManager;
+        }
+        
+        public AccountManager AccountManager
+        {
+            get
+            {
+                return _accountManager ?? new AccountManager();
+            }
+            private set
+            {
+                _accountManager = value;
             }
         }
 
@@ -75,16 +86,16 @@ namespace Management.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = AccountManager.Login(model.Email, model.Password);
             switch (result)
             {
-                case SignInStatus.Success:
+                case LoginStatus.Success:
                     return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
+                case LoginStatus.LockedOut:
                     return View("Lockout");
-                case SignInStatus.RequiresVerification:
+                case LoginStatus.RequiresVerification:
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
+                case LoginStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);

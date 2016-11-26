@@ -35,7 +35,7 @@ namespace Tests.Common
                 Id = 1,
                 Ip = "127.0.0.1",
                 UserId = 1,
-                CategoryId = 1,
+                Category = "aa",
                 ProductId = 1,
                 Date = DateTime.Now
             };
@@ -45,7 +45,7 @@ namespace Tests.Common
                 Id = 2,
                 Ip = "127.0.0.1",
                 UserId = 1,
-                CategoryId = 1,
+                Category = "aa",
                 ProductId = 2,
                 Date = DateTime.Now
             };
@@ -55,7 +55,7 @@ namespace Tests.Common
                 Id = 3,
                 Ip = "127.0.0.1",
                 UserId = 2,
-                CategoryId = 1,
+                Category = "aa",
                 ProductId = 1,
                 Date = DateTime.Now
             };
@@ -99,7 +99,7 @@ namespace Tests.Common
                 Function = "avg",
                 Period = 10,
                 UserId = 1,
-                CategoryId = 1
+                Category = "aa"
             };
 
             using (var session = Connector.OpenSession())

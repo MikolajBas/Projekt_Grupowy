@@ -6,14 +6,19 @@ using System.Linq;
 using Common.Logging;
 using System;
 using NHibernate;
+using Common.Helpers;
 
-namespace Common.Helpers
+namespace Common.Managers
 {
-    public static class UserHelper
+    public class UserManager
     {
-        public static Logger _logger = new Logger("Common.Helpers.UserHelper");
+        public Logger _logger = new Logger("Common.Managers.UserManager");
 
-        public static bool ValidateUser(ISession session, string login, string password, AccountType accountType)
+        public UserManager()
+        {
+        }
+
+        public bool ValidateUser(ISession session, string login, string password, AccountType accountType)
         {
             var user = session.Query<User>().FirstOrDefault(x => x.Login == login && x.Password == password && x.AccountType == accountType);
             
@@ -24,7 +29,7 @@ namespace Common.Helpers
             return true;
         }
 
-        public static string CreateUser(User user)
+        public string CreateUser(User user)
         {
             try
             {
@@ -55,7 +60,7 @@ namespace Common.Helpers
             return "User created successfully";
         }
 
-        public static string UpdateUser(User user)
+        public string UpdateUser(User user)
         {
             try
             {
@@ -75,7 +80,7 @@ namespace Common.Helpers
             return "User updated successfully";
         }
 
-        public static string DeleteUser(int id)
+        public string DeleteUser(int id)
         {
             try
             {
@@ -106,7 +111,7 @@ namespace Common.Helpers
             return "User deleted successfully";
         }
 
-        public static User GetUser(int id)
+        public User GetUser(int id)
         {
             try
             {
@@ -135,7 +140,7 @@ namespace Common.Helpers
             }
         }
 
-        public static User GetUserByGuid(ISession session, string guid)
+        public User GetUserByGuid(ISession session, string guid)
         {
             try
             {

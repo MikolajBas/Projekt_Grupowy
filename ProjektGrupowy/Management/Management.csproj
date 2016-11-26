@@ -307,6 +307,10 @@
       <Project>{abec7331-50ac-4ef8-b25a-d1754e11bb67}</Project>
       <Name>Database</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Common\Data\Data.csproj">
+      <Project>{7CA6E62C-A9AA-48CB-B0C3-08D7ECA916E9}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
