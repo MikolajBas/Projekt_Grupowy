@@ -1,17 +1,16 @@
-CREATE DATABASE IF NOT EXISTS dotnot;
+CREATE DATABASE IF NOT EXISTS pgdb;
 
-USE dotnot;
+USE pgdb;
 
-DROP TABLE IF EXISTS `users`;
-DROP TABLE IF EXISTS `sites_data`;
-DROP TABLE IF EXISTS `data_categories`;
-DROP TABLE IF EXISTS `data_property_configurations`;
 DROP TABLE IF EXISTS `data_properties`;
-DROP TABLE IF EXISTS `event_configurations`;
-DROP TABLE IF EXISTS `event_configuration_properties`;
 DROP TABLE IF EXISTS `event_logs`;
+DROP TABLE IF EXISTS `event_configuration_properties`;
+DROP TABLE IF EXISTS `event_configurations`;
+DROP TABLE IF EXISTS `data_property_configurations`;
+DROP TABLE IF EXISTS `sites_data`;
 DROP TABLE IF EXISTS `notifications`;
 DROP TABLE IF EXISTS `notification_configurations`;
+DROP TABLE IF EXISTS `users`;
 
 CREATE TABLE users(
    id INT NOT NULL AUTO_INCREMENT,
@@ -35,18 +34,8 @@ CREATE TABLE sites_data(
    product_name VARCHAR(64),
    product_id INT,
    user_id INT NOT NULL,
-   category_id INT NOT NULL,
+   category VARCHAR(128) NOT NULL,
    visit_date DATETIME,
-   FOREIGN KEY (user_id) REFERENCES users(id),
-   FOREIGN KEY (category_id) REFERENCES data_categories(id),
-   PRIMARY KEY ( id )
-);
-
-CREATE TABLE data_categories(
-   id INT NOT NULL AUTO_INCREMENT,
-   name VARCHAR(32) NOT NULL,
-   category_id INT NOT NULL,
-   user_id INT NOT NULL,
    FOREIGN KEY (user_id) REFERENCES users(id),
    PRIMARY KEY ( id )
 );
@@ -71,7 +60,6 @@ CREATE TABLE data_properties(
 
 CREATE TABLE event_configurations(
    id INT NOT NULL AUTO_INCREMENT,
-   property_id INT NOT NULL,
    property_value VARCHAR(32) NOT NULL,
    event_operator VARCHAR(32) NOT NULL,
    result_value INT NOT NULL,
@@ -80,9 +68,8 @@ CREATE TABLE event_configurations(
    template VARCHAR(64),
    user_id INT NOT NULL,
    category_id INT NOT NULL,
+   category VARCHAR(128) NOT NULL,
    FOREIGN KEY (user_id) REFERENCES users(id),
-   FOREIGN KEY (property_id) REFERENCES data_properties_configuration(id),
-   FOREIGN KEY (category_id) REFERENCES event_configurations(id),
    PRIMARY KEY ( id )
 );
 
@@ -106,17 +93,6 @@ CREATE TABLE event_logs(
    PRIMARY KEY ( id )
 );
 
-CREATE TABLE notifications(
-   id INT NOT NULL AUTO_INCREMENT,
-   message VARCHAR(64) NOT NULL,
-   user_id INT NOT NULL,
-   notification_configuration_id INT NOT NULL,
-   notification_date DATETIME NOT NULL,
-   FOREIGN KEY (user_id) REFERENCES users(id),
-   FOREIGN KEY (notification_configuration_id) REFERENCES notification_configurations(id),
-   PRIMARY KEY ( id )
-);
-
 CREATE TABLE notification_configurations(
    id INT NOT NULL AUTO_INCREMENT,
    property_id INT NOT NULL,
@@ -128,11 +104,19 @@ CREATE TABLE notification_configurations(
    period INT NOT NULL,
    message VARCHAR(64),
    user_id INT NOT NULL,
-   category_id INT NOT NULL,
+   category VARCHAR(128) NOT NULL,
    FOREIGN KEY (user_id) REFERENCES users(id),
-   FOREIGN KEY (property_id) REFERENCES data_properties_configuration(id),
-   FOREIGN KEY (category_id) REFERENCES event_configurations(id),
+   FOREIGN KEY (property_id) REFERENCES data_properties(id),
    PRIMARY KEY ( id )
 );
 
-
+CREATE TABLE notifications(
+   id INT NOT NULL AUTO_INCREMENT,
+   message VARCHAR(64) NOT NULL,
+   user_id INT NOT NULL,
+   notification_configuration_id INT NOT NULL,
+   notification_date DATETIME NOT NULL,
+   FOREIGN KEY (user_id) REFERENCES users(id),
+   FOREIGN KEY (notification_configuration_id) REFERENCES notification_configurations(id),
+   PRIMARY KEY ( id )
+);

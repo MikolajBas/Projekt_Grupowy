@@ -25,7 +25,7 @@ namespace Database
             _sessionFactory = Fluently.Configure()
                 .Database(MySQLConfiguration.Standard
                     .ConnectionString(x => x.Server("localhost")
-                                            .Database("dotnot")
+                                            .Database("pgdb")
                                             .Username("root")
                                             .Password("inz15/16"))
                     .ShowSql() //FromConnectionStringWithKey("Server=localhost; Port=3306; Database=dotnot; Uid=root; Pwd=inz15/16;")
