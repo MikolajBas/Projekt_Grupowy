@@ -14,7 +14,7 @@ namespace Database.Models.Mapping
             Map(x => x.ScreenResolution).Column("screen_resolution");
             Map(x => x.Agent).Column("agent");
             Map(x => x.Browser).Column("browser");
-            Map(x => x.CategoryId).Not.Nullable().Column("category_id");
+            Map(x => x.Category).Not.Nullable().Column("category");
             Map(x => x.System).Column("system");
             Map(x => x.Url).Not.Nullable().Column("url");
             Map(x => x.UserId).Not.Nullable().Column("user_id");

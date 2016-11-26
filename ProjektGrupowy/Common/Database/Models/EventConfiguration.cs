@@ -22,6 +22,6 @@
 
         public virtual string Template { get; set; }
 
-        public virtual int CategoryId { get; set; }
+        public virtual string Category { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace Database.Models
 
         public virtual int UserId { get; set; }
 
-        public virtual int CategoryId { get; set; }
+        public virtual string Category { get; set; }
 
         public virtual int ProductId { get; set; }
 

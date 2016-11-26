@@ -57,13 +57,11 @@
     <Compile Include="HibernateModel.cs" />
     <Compile Include="InMemorySessionProvider.cs" />
     <Compile Include="Models\Data.cs" />
-    <Compile Include="Models\DataCategory.cs" />
     <Compile Include="Models\DataPropertiesConfiguration.cs" />
     <Compile Include="Models\DataProperty.cs" />
     <Compile Include="Models\EventConfiguration.cs" />
     <Compile Include="Models\EventConfigurationProperty.cs" />
     <Compile Include="Models\EventLog.cs" />
-    <Compile Include="Models\Mapping\DataCategoryMapping.cs" />
     <Compile Include="Models\Mapping\DataMapping.cs" />
     <Compile Include="Models\Mapping\DataPropertiesConfigurationMapping.cs" />
     <Compile Include="Models\Mapping\DataPropertyMapping.cs" />
