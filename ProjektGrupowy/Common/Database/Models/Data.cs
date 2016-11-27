@@ -2,7 +2,7 @@
 
 namespace Database.Models
 {
-    public class Data
+    public class Data : BaseModel<Data>
     {
         public virtual int Id { get; set; }
 

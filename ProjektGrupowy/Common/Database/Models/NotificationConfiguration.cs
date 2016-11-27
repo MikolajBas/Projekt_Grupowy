@@ -1,6 +1,6 @@
 ﻿namespace Database.Models
 {
-    public class NotificationConfiguration
+    public class NotificationConfiguration : BaseModel<NotificationConfiguration>
     {
         public virtual int Id { get; set; }
 

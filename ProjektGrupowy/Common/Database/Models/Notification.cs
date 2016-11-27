@@ -2,7 +2,7 @@
 
 namespace Database.Models
 {
-    public class Notification
+    public class Notification : BaseModel<Notification>
     {
         public virtual int Id { get; set; }
 

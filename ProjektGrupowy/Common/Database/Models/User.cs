@@ -2,7 +2,7 @@
 
 namespace Database.Models
 {
-    public class User
+    public class User : BaseModel<User>
     {
         public virtual int Id { get; set; }
 

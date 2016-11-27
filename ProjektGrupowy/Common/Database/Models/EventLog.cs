@@ -2,7 +2,7 @@
 
 namespace Database.Models
 {
-    public class EventLog
+    public class EventLog : BaseModel<EventLog>
     {
         public virtual int Id { get; set; }
 

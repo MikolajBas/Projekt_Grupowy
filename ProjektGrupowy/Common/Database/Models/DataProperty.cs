@@ -1,6 +1,6 @@
 ﻿namespace Database.Models
 {
-    public class DataProperty
+    public class DataProperty : BaseModel<DataProperty>
     {
         public virtual int Id { get; set; }
 

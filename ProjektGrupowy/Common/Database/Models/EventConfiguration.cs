@@ -1,6 +1,6 @@
 ﻿namespace Database.Models
 {
-    public class EventConfiguration
+    public class EventConfiguration : BaseModel<EventConfiguration>
     {
         public virtual int Id { get; set; }
 
