@@ -21,13 +21,7 @@ namespace Database
         #region IUserStore<User, int>
         public Task CreateAsync(User user)
         {
-            try
-            {
-                session.SaveOrUpdate(user);
-                return Task.Run(() => session.SaveOrUpdate(user));
-            }
-            catch (NHibernate.Exceptions.GenericADOException ex)
-            { throw ex; }
+            return Task.Run(() => session.SaveOrUpdate(user));
         }
 
         public Task DeleteAsync(User user)

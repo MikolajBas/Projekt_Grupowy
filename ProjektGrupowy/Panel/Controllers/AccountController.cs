@@ -12,7 +12,6 @@ using Panel.Models;
 using Database.Models;
 using Panel.Models.Identity;
 using Data.Enums;
-using Microsoft.Owin.Security.Cookies;
 
 namespace Panel.Controllers
 {
@@ -29,8 +28,7 @@ namespace Panel.Controllers
         }
         public UserManager UserManager
         {
-            get { var x = HttpContext.GetOwinContext().GetUserManager<UserManager>();
-                return x; }
+            get { return HttpContext.GetOwinContext().GetUserManager<UserManager>(); }
         }
 
         //

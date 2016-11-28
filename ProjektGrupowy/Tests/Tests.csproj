@@ -111,10 +111,6 @@
       <Project>{2c68fd8e-c347-4ec2-b71b-63f3237f360f}</Project>
       <Name>Statistics</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Management\Management.csproj">
-      <Project>{205edbce-0816-4923-9cca-aacffc1fe8d8}</Project>
-      <Name>Management</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Web Services\CollectorService\CollectorService.csproj">
       <Project>{d69e9a15-3db9-4390-a8b3-5a5b794dfe15}</Project>
       <Name>CollectorService</Name>
