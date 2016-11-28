@@ -2,6 +2,8 @@
 using FluentNHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 using FluentNHibernate.Cfg.Db;
+using Microsoft.AspNet.Identity;
+using Database.Models;
 
 namespace Database
 {
@@ -43,6 +45,11 @@ namespace Database
         public static ISession OpenSession()
         {
             return SessionFactory.OpenSession();
+        }
+
+        public IUserStore<User, int> Users
+        {
+            get { return new IdentityStore(OpenSession()); }
         }
     }
 }

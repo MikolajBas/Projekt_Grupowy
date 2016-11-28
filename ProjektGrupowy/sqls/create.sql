@@ -19,6 +19,8 @@ CREATE TABLE users(
    email VARCHAR(128) NOT NULL,
    name VARCHAR(32) NOT NULL,
    surname VARCHAR(128) NOT NULL,
+   url VARCHAR(128) NOT NULL,
+   guid VARCHAR(128) NOT NULL,
    account_type INT NOT NULL,
    PRIMARY KEY ( id )
 );

@@ -20,7 +20,7 @@ namespace Common.Managers
 
         public bool ValidateUser(ISession session, string login, string password, AccountType accountType)
         {
-            var user = session.Query<User>().FirstOrDefault(x => x.Login == login && x.Password == password && x.AccountType == accountType);
+            var user = session.Query<User>().FirstOrDefault(x => x.UserName == login && x.Password == password && x.AccountType == accountType);
             
             if (user == null)
             {
@@ -38,7 +38,7 @@ namespace Common.Managers
                 using (var session = Connector.OpenSession())
                 using (var transaction = session.BeginTransaction())
                 {
-                    if (ValidateUser(session, user.Login, user.Password, user.AccountType))
+                    if (ValidateUser(session, user.UserName, user.Password, user.AccountType))
                     {
                         session.Save(user);
                     }

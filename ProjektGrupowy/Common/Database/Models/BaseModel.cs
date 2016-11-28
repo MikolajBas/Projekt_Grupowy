@@ -5,7 +5,7 @@ namespace Database.Models
     public class BaseModel<T>
     {
         #region Insert
-        public void Insert(T model)
+        public virtual void Insert(T model)
         {
             using (var session = Connector.OpenSession())
             {
@@ -13,7 +13,7 @@ namespace Database.Models
             }
         }
         
-        public void Insert(ISession session, T model)
+        public virtual void Insert(ISession session, T model)
         {
             using (var transaction = session.BeginTransaction())
             {
@@ -24,7 +24,7 @@ namespace Database.Models
         #endregion
 
         #region Update
-        public void Update(T model)
+        public virtual void Update(T model)
         {
             using (var session = Connector.OpenSession())
             {
@@ -32,7 +32,7 @@ namespace Database.Models
             }
         }
 
-        public void Update(ISession session, T model)
+        public virtual void Update(ISession session, T model)
         {
             using (var transaction = session.BeginTransaction())
             {
@@ -43,7 +43,7 @@ namespace Database.Models
         #endregion
 
         #region Delete
-        public void Delete(T model)
+        public virtual void Delete(T model)
         {
             using (var session = Connector.OpenSession())
             {
@@ -51,7 +51,7 @@ namespace Database.Models
             }
         }
 
-        public void Delete(ISession session, T model)
+        public virtual void Delete(ISession session, T model)
         {
             using (var transaction = session.BeginTransaction())
             {
