@@ -6,19 +6,14 @@ using System.Linq;
 using Common.Logging;
 using System;
 using NHibernate;
-using Common.Helpers;
 
-namespace Common.Managers
+namespace Common.Helpers
 {
-    public class UserManager
+    public static class UserHelper
     {
-        public Logger _logger = new Logger("Common.Managers.UserManager");
-
-        public UserManager()
-        {
-        }
-
-        public bool ValidateUser(ISession session, string login, string password, AccountType accountType)
+        public static Logger _logger = new Logger("Common.Managers.UserHelper");
+        
+        public static bool ValidateUser(ISession session, string login, string password, AccountType accountType)
         {
             var user = session.Query<User>().FirstOrDefault(x => x.UserName == login && x.Password == password && x.AccountType == accountType);
             
@@ -29,38 +24,7 @@ namespace Common.Managers
             return true;
         }
 
-        public string CreateUser(User user)
-        {
-            try
-            {
-                user.Password = TextHelper.Hash(user.Password);
-
-                using (var session = Connector.OpenSession())
-                using (var transaction = session.BeginTransaction())
-                {
-                    if (ValidateUser(session, user.UserName, user.Password, user.AccountType))
-                    {
-                        session.Save(user);
-                    }
-                    else
-                    {
-                        transaction.Commit();
-                        return "User already exists in system";
-                    }
-
-                    transaction.Commit();
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex);
-                return "Error during user creation";
-            }
-
-            return "User created successfully";
-        }
-
-        public string UpdateUser(User user)
+        public static string UpdateUser(User user)
         {
             try
             {
@@ -80,7 +44,7 @@ namespace Common.Managers
             return "User updated successfully";
         }
 
-        public string DeleteUser(int id)
+        public static string DeleteUser(int id)
         {
             try
             {
@@ -111,7 +75,7 @@ namespace Common.Managers
             return "User deleted successfully";
         }
 
-        public User GetUser(int id)
+        public static User GetUser(int id)
         {
             try
             {
@@ -140,7 +104,7 @@ namespace Common.Managers
             }
         }
 
-        public User GetUserByGuid(ISession session, string guid)
+        public static User GetUserByGuid(ISession session, string guid)
         {
             try
             {
@@ -161,6 +125,11 @@ namespace Common.Managers
 
                 throw ex;
             }
+        }
+
+        public static string GenerateGuid()
+        {
+            return Guid.NewGuid().ToString();
         }
     }
 }

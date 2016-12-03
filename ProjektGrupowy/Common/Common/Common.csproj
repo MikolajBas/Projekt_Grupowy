@@ -51,7 +51,7 @@
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\TextHelper.cs" />
     <Compile Include="Managers\AccountManager.cs" />
-    <Compile Include="Managers\UserManager.cs" />
+    <Compile Include="Helpers\UserHelper.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Serializers\DataSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

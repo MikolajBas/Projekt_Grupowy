@@ -14,6 +14,23 @@ namespace Panel.Models
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
+        
+        [StringLength(32)]
+        [DataType(DataType.Text)]
+        [Display(Name = "Name")]
+        public string Name { get; set; }
+
+        [StringLength(128)]
+        [DataType(DataType.Text)]
+        [Display(Name = "Surname")]
+        public string Surname { get; set; }
+
+        [Required]
+        [StringLength(128)]
+        [DataType(DataType.Url)]
+        [Display(Name = "Url")]
+        public string Url { get; set; }
+
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -12,6 +10,7 @@ using Panel.Models;
 using Database.Models;
 using Panel.Models.Identity;
 using Data.Enums;
+using Common.Helpers;
 
 namespace Panel.Controllers
 {
@@ -26,6 +25,7 @@ namespace Panel.Controllers
         {
             get { return HttpContext.GetOwinContext().Get<SignInManager>(); }
         }
+
         public UserManager UserManager
         {
             get { return HttpContext.GetOwinContext().GetUserManager<UserManager>(); }
@@ -137,10 +137,10 @@ namespace Panel.Controllers
                         UserName = model.Email,
                         Password = model.Password,
                         Email = model.Email,
-                        Name = model.Email,
-                        Surname = model.Email,
-                        Url = model.Email,
-                        Guid = model.Email,
+                        Name = model.Name,
+                        Surname = model.Surname,
+                        Url = model.Url,
+                        Guid = UserHelper.GenerateGuid(),
                         AccountType = AccountType.User
                     };
                     var result = UserManager.Create(user, model.Password);
