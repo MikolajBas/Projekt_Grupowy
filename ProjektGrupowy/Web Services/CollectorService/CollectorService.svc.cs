@@ -17,19 +17,6 @@ namespace CollectorService
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class CollectorService
     {
-        private UserManager _userManager;
-        public UserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? new UserManager();
-            }
-            private set
-            {
-                _userManager = value;
-            }
-        }
-
         [OperationContract]
         public void Collect(string jsonData, string jsonDataProperties, string userGuid)
         {
@@ -59,7 +46,7 @@ namespace CollectorService
             {
                 var configurator = new EventConfigurator();
                 
-                var userId = UserManager.GetUserByGuid(session, userGuid).Id;
+                var userId = UserHelper.GetUserByGuid(session, userGuid).Id;
                 
                 var configs = session.Query<EventConfiguration>().Where(x => x.UserId == userId);
 

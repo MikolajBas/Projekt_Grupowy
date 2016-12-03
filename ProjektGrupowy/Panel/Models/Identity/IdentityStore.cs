@@ -2,14 +2,16 @@
 using Microsoft.AspNet.Identity;
 using NHibernate;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace NHibernateAspNetIdentityExample.Models.Identity
+namespace Panel.Models.Identity
 {
     public class IdentityStore : IUserStore<User, int>,
         IUserPasswordStore<User, int>,
         IUserLockoutStore<User, int>,
-        IUserTwoFactorStore<User, int>
+        IUserTwoFactorStore<User, int>,
+        IUserLoginStore<User, int>
     {
         private readonly ISession session;
 
@@ -46,7 +48,14 @@ namespace NHibernateAspNetIdentityExample.Models.Identity
 
         public Task UpdateAsync(User user)
         {
-            return Task.Run(() => session.SaveOrUpdate(user));
+            return Task.Run(() =>
+            {
+                using (var transaction = session.BeginTransaction())
+                {
+                    session.Update(user);
+                    transaction.Commit();
+                }
+            });
         }
         #endregion
 
@@ -113,6 +122,31 @@ namespace NHibernateAspNetIdentityExample.Models.Identity
         public Task<bool> GetTwoFactorEnabledAsync(User user)
         {
             return Task.FromResult(false);
+        }
+        #endregion
+
+        #region IUserLoginStore<User, int>
+        public Task AddLoginAsync(User user, UserLoginInfo login)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task<User> FindAsync(UserLoginInfo login)
+        {
+            return Task.Run(() => session.Get<User>(login));
+        }
+
+        public Task<IList<UserLoginInfo>> GetLoginsAsync(User user)
+        {
+            return Task.Run(() => {
+                IList<UserLoginInfo> userLoginInfo = new List<UserLoginInfo>();
+                return userLoginInfo;
+            });
+        }
+
+        public Task RemoveLoginAsync(User user, UserLoginInfo login)
+        {
+            return Task.Run(() => session.Delete(login));
         }
         #endregion
 

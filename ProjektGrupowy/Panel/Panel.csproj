@@ -226,6 +226,7 @@
     <Compile Include="Models\Basic\SetPasswordViewModel.cs" />
     <Compile Include="Models\Basic\VerifyCodeViewModel.cs" />
     <Compile Include="Models\Basic\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="Models\Identity\IdentityStore.cs" />
     <Compile Include="Models\Identity\SignInManager.cs" />
     <Compile Include="Models\Identity\UserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
