@@ -2,5 +2,59 @@
     ViewBag.Title = "Statistics";
 }
 
-<h2>Statistics</h2>
+<body>
+</br></br></br></br>
+
+    <table style="width:100%">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>TypeId</th>
+            <th>UserId</th>
+            <th></th>
+            <th></th>
+        </tr>
+        @foreach (var configuration in @ViewBag.configurations)
+        {
+            <tr>
+                <td>@configuration.Id</td>
+                <td>@configuration.Name</td>
+                <td>@configuration.TypeId</td>
+                <td>@configuration.UserId</td>
+                <form method="POST" action="/Statistics/editData">
+                    <td><input name="Submit" type="Submit" value="Edit" /></td>
+                        <input name="edit"   type="hidden" value=@configuration.Id />
+                </form>
+                <form method="POST" action="/Statistics/deleteData">
+                    <td><input name="Submit" type="Submit" value="Delete"/></td>
+                        <input name="delete" type="hidden" value=@configuration.Id />
+                </form>
+            </tr>
+        }
+    </table>
+
+    </br></br></br>
+
+    <form method="POST" action="/Statistics/addConfiguration">
+
+        Name  :
+        <input type="text" name="name" value="nowy"/>
+        <br />
+        UserId:
+        <input type="text" name="user" value=1 />
+        <br />
+        TypeId:
+        <select name="type">
+            <option>String</option>
+            <option>Int</option>
+        </select>
+        </br></br>
+        <input value="Save" type="Submit" />
+
+    </form>
+
+    </br></br></br>
+
+    </body>
+
 

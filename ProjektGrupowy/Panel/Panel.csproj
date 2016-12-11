@@ -315,6 +315,10 @@
       <Project>{de7a3292-64c8-4265-a94b-dd9962e89453}</Project>
       <Name>Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Common\Configurator\Configurator.csproj">
+      <Project>{5224d75a-14d6-43ce-ac0d-8114358bd688}</Project>
+      <Name>Configurator</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Common\Database\Database.csproj">
       <Project>{abec7331-50ac-4ef8-b25a-d1754e11bb67}</Project>
       <Name>Database</Name>

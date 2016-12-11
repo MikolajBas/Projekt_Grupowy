@@ -25,8 +25,11 @@ namespace Configurator
 
                 if (config != null)
                 {
-                    throw new Exception("Data property is already exists");
+                    transaction.Dispose();
+                    return;
+                    //throw new Exception("Data property is already exists");
                 }
+
 
                 config = new DataPropertiesConfiguration
                 {
@@ -48,14 +51,71 @@ namespace Configurator
             using (var transaction = session.BeginTransaction())
             {
                 configurations = session.Query<DataPropertiesConfiguration>().Where(x => x.UserId == userId).ToList();
+                //configurations = session.QueryOver<DataPropertiesConfiguration>().Where(c => c.UserId == userId).List();
                 transaction.Commit();
             }
 
-            if (!configurations.Any())
-                throw new Exception("No configurations found");
+            //if (!configurations.Any())
+            //    throw new Exception("No configurations found");
 
             return configurations;
         }
+
+        public List<DataPropertiesConfiguration> GetAllData()
+        {
+            var configurations = new List<DataPropertiesConfiguration>();
+
+            using (var session = Connector.OpenSession())
+            using (var transaction = session.BeginTransaction())
+            {
+                configurations = session.Query<DataPropertiesConfiguration>().ToList();
+                //configurations = session.QueryOver<DataPropertiesConfiguration>().Where(c => c.UserId == userId).List();
+                transaction.Commit();
+            }
+
+           // if (!configurations.Any())
+           //     throw new Exception("No configurations found");
+
+            return configurations;
+        }
+
+        public void deleteData(int id)
+        {
+            using (var session = Connector.OpenSession())
+            using (var transaction = session.BeginTransaction())
+            {
+                var configuration = session.Query<DataPropertiesConfiguration>().Where(x => x.Id == id).ToList();
+
+                session.Delete(configuration[0]);
+                session.Flush();
+                transaction.Commit();
+            }
+
+            //if (!configurations.Any())
+            //    throw new Exception("No configurations found");
+
+            //return configurations;
+        }
+
+        public void editData()
+        {
+            var configurations = new List<DataPropertiesConfiguration>();
+
+            using (var session = Connector.OpenSession())
+            using (var transaction = session.BeginTransaction())
+            {
+                configurations = session.Query<DataPropertiesConfiguration>().ToList();
+                //configurations = session.QueryOver<DataPropertiesConfiguration>().Where(c => c.UserId == userId).List();
+                transaction.Commit();
+            }
+
+            //if (!configurations.Any())
+            //    throw new Exception("No configurations found");
+
+            //return configurations;
+        }
+
+
 
         public bool IsConfigurationValid(int userId, string name, string value)
         {

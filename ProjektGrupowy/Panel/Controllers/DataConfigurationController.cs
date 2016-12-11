@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Database.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,9 @@ namespace Panel.Controllers
     {
         public ActionResult Index()
         {
+            Configurator.DataConfigurator dataConfigurator = new Configurator.DataConfigurator();
+            List<DataPropertiesConfiguration> dataPropertiesConfiguration = dataConfigurator.GetUserConfigurations(0);
+            ViewBag.configurations = dataPropertiesConfiguration;
             return View();
         }
     }
