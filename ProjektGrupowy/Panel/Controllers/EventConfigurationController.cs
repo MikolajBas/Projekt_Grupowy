@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace Panel.Controllers
 {
+    [Authorize]
     public class EventConfigurationController : Controller
     {
         public ActionResult Index()

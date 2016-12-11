@@ -127,6 +127,30 @@ namespace Common.Helpers
             }
         }
 
+        public static User GetUserByIdentityName(ISession session, string identityName)
+        {
+            try
+            {
+                var user = session.Query<User>().FirstOrDefault(x => x.UserName == identityName);
+
+                if (user != null)
+                {
+                    return user;
+                }
+                else
+                {
+                    throw new Exception(string.Format("No user found with identity name: {0}", identityName));
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex);
+
+                throw ex;
+            }
+        }
+
+
         public static string GenerateGuid()
         {
             return Guid.NewGuid().ToString();

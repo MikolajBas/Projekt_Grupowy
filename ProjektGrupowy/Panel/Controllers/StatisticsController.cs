@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Panel.Controllers
 {
+    [Authorize]
     public class StatisticsController : Controller
     {
         public ActionResult Index()
