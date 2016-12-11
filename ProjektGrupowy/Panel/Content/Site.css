@@ -22,3 +22,24 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.navbar {
+    background-color: #2a3384;
+}
+
+.navbar a:link {
+    color: white !important;
+    font-family: 'Arial Rounded MT';
+}
+
+.navbar a:visited {
+    color: white !important;
+}
+
+.navbar a:hover {
+    color: #949ffc !important;
+}
+
+.navbar a:active {
+    color: white !important;
+}
