@@ -2,7 +2,7 @@
 
 namespace Database.Models
 {
-    public class Notification
+    public class Notification //syten notificatiom
     {
         public int Id { get; set; }
 

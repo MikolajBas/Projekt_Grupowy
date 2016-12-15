@@ -20,7 +20,7 @@ namespace Database.Models
 
         public int UserId { get; set; }
 
-        public int CategoryId { get; set; }
+        public int CategoryId { get; set; } //identyfikator kategorii produktu/zakupu
 
         public int ProductId { get; set; }
 
