@@ -51,7 +51,6 @@ namespace Configurator
             using (var transaction = session.BeginTransaction())
             {
                 configurations = session.Query<DataPropertiesConfiguration>().Where(x => x.UserId == userId).ToList();
-                //configurations = session.QueryOver<DataPropertiesConfiguration>().Where(c => c.UserId == userId).List();
                 transaction.Commit();
             }
 
@@ -79,7 +78,7 @@ namespace Configurator
             return configurations;
         }
 
-        public void deleteData(int id)
+        public void DeleteData(int id)
         {
             using (var session = Connector.OpenSession())
             using (var transaction = session.BeginTransaction())
@@ -97,7 +96,7 @@ namespace Configurator
             //return configurations;
         }
 
-        public void editData()
+        public void EditData()
         {
             var configurations = new List<DataPropertiesConfiguration>();
 

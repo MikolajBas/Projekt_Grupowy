@@ -1,9 +1,6 @@
-﻿using Database.Models;
-using System;
+﻿using Common.Helpers;
+using Database.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Panel.Controllers
@@ -13,10 +10,48 @@ namespace Panel.Controllers
     {
         public ActionResult Index()
         {
+            int userId = UserHelper.GetUserByIdentityName(User.Identity.Name).Id;
             Configurator.DataConfigurator dataConfigurator = new Configurator.DataConfigurator();
-            List<DataPropertiesConfiguration> dataPropertiesConfiguration = dataConfigurator.GetUserConfigurations(0);
+
+            List<DataPropertiesConfiguration> dataPropertiesConfiguration = dataConfigurator.GetUserConfigurations(userId);
             ViewBag.configurations = dataPropertiesConfiguration;
             return View();
+        }
+
+        public ActionResult AddConfiguration()
+        {
+            Configurator.DataConfigurator dataConfigurator = new Configurator.DataConfigurator();
+            var name = string.Format("{0}", Request.Form["name"]);
+            var type = string.Format("{0}", Request.Form["type"]);
+            
+            int userId = UserHelper.GetUserByIdentityName(User.Identity.Name).Id;
+            dataConfigurator.AddDataPropertiesConfiguration(name, type, userId);
+
+            List<DataPropertiesConfiguration> dataPropertiesConfiguration = dataConfigurator.GetUserConfigurations(userId);
+            ViewBag.configurations = dataPropertiesConfiguration;
+
+            return View("Index");
+        }
+
+        public ActionResult EditData()
+        {
+            return View();
+        }
+
+        public ActionResult DeleteData()
+        {
+            int id;
+            int.TryParse(Request.Form["delete"], out id);
+
+            Configurator.DataConfigurator dataConfigurator = new Configurator.DataConfigurator();
+            dataConfigurator.DeleteData(id);
+
+            int userId = UserHelper.GetUserByIdentityName(User.Identity.Name).Id;
+
+            List<DataPropertiesConfiguration> dataPropertiesConfiguration = dataConfigurator.GetUserConfigurations(userId);
+            ViewBag.configurations = dataPropertiesConfiguration;
+
+            return View("Index");
         }
     }
 }

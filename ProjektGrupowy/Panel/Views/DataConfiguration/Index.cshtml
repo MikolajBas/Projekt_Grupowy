@@ -1,7 +1,53 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "DataConfiguration";
 }
 
-<h2>DataConfiguration</h2>
+<h2>Data Configuration</h2>
+</br></br></br></br>
 
+<table style="width:100%">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>TypeId</th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach (var configuration in @ViewBag.configurations)
+    {
+        <tr>
+            <td>@configuration.Id</td>
+            <td>@configuration.Name</td>
+            <td>@configuration.TypeId</td>
+
+            <form method="POST" action="/DataConfiguration/EditData">
+                <td><input name="Submit" type="Submit" value="Edit" /></td>
+                <input name="edit" type="hidden" value=@configuration.Id />
+            </form>
+            
+            <form method="POST" action="/DataConfiguration/DeleteData">
+                <td><input name="Submit" type="Submit" value="Delete" /></td>
+                <input name="delete" type="hidden" value=@configuration.Id />
+            </form>
+        </tr>
+    }
+</table>
+
+</br></br></br>
+
+<form method="POST" action="/DataConfiguration/AddConfiguration">
+
+    Name:
+    <input type="text" name="name" value="nowy" />
+    <br />
+    Type:
+    <select name="type">
+        <option>String</option>
+        <option>Int</option>
+    </select>
+    </br></br>
+    <input value="Save" type="Submit" />
+
+</form>
+
+</br></br></br>

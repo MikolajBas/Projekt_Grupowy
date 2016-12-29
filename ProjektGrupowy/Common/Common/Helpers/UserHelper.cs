@@ -127,6 +127,26 @@ namespace Common.Helpers
             }
         }
 
+        public static User GetUserByIdentityName(string identityName)
+        {
+            using (var session = Connector.OpenSession())
+            using (var transaction = session.BeginTransaction())
+            {
+                try
+                {
+                    var user = GetUserByIdentityName(session, identityName);
+                    transaction.Commit();
+
+                    return user;
+                }
+                catch (Exception ex)
+                {
+                    transaction.Commit();
+                    throw ex;
+                }
+            }
+        }
+
         public static User GetUserByIdentityName(ISession session, string identityName)
         {
             try
