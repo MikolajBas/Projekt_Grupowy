@@ -43,3 +43,13 @@ textarea {
 .navbar a:active {
     color: white !important;
 }
+
+.jumbotron {
+    color: white;
+    text-shadow: 2px 2px #000033;
+    background-image: url("Pictures/drawing-businessman-with-statistics-background-FH9J97.jpg") !important;
+}
+
+.jumbotron .btn-lg {
+    text-shadow: none;
+}
