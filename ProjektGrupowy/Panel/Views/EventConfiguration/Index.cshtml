@@ -1,6 +1,69 @@
 ﻿@{
-    ViewBag.Title = "EventConfiguration";
+    ViewBag.Title = "Event Configuration";
 }
 
-<h2>EventConfiguration</h2>
+<div class="container"></div>
+<h2>Event Configuration</h2>
 
+<div class="row">
+    <table id="" class="table table-hover">
+        <thead>
+            <tr>
+                <th>Event rule</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+<div class="row">
+    <form>
+        <div class="form-group">
+            <label for="function-input">Function:</label>
+            <select class="form-control" id="function-input">
+                <option>SUM</option>
+                <option>AVG</option>
+                <option>COUNT</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="property-input">Property:</label>
+            <select class="form-control" id="property-input">
+                <option>1</option>
+                <option>2</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="property-operator-input">Property operator:</label>
+            <select class="form-control" id="property-operator-input">
+                <option>=</option>
+                <option>></option>
+                <option><</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="property-value-operator">Property value:</label>
+            <input type="text" class="form-control" id="property-value-operator">
+        </div>
+        <div class="form-group">
+            <label for="operator-input">Operator:</label>
+            <select class="form-control" id="operator-input">
+                <option>=</option>
+                <option>></option>
+                <option><</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="value-input">Value:</label>
+            <input type="text" class="form-control" id="value-input">
+        </div>
+
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>
+<div class="row">
+    <p>Function(property [property_operator] property_value) [operator] value</p>
+</div>
+</div>

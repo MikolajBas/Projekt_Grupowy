@@ -53,3 +53,7 @@ textarea {
 .jumbotron .btn-lg {
     text-shadow: none;
 }
+
+.row {
+    padding-bottom: 40px;
+}
