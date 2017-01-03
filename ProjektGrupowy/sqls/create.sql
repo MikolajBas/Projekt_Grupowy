@@ -63,10 +63,12 @@ CREATE TABLE data_properties(
 CREATE TABLE event_configurations(
    id INT NOT NULL AUTO_INCREMENT,
    property_value VARCHAR(32) NOT NULL,
-   event_operator VARCHAR(32) NOT NULL,
+   operator VARCHAR(32) NOT NULL,
+   property_operator VARCHAR(32) NOT NULL,
    result_value INT NOT NULL,
    event_function VARCHAR(32),
    period INT NOT NULL,
+   property_id INT NOT NULL,
    template VARCHAR(64),
    user_id INT NOT NULL,
    category_id INT NOT NULL,

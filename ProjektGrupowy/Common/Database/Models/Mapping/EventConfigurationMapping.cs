@@ -9,7 +9,8 @@ namespace Database.Models.Mapping
         {
             Table("event_configurations");
             Id(x => x.Id).Not.Nullable().Column("id");
-            Map(x => x.Operator).Not.Nullable().Column("event_operator");
+            Map(x => x.Operator).Not.Nullable().Column("operator");
+            Map(x => x.PropertyOperator).Not.Nullable().Column("property_operator");
             Map(x => x.Period).Not.Nullable().Column("period");
             Map(x => x.PropertyId).Not.Nullable().Column("property_id");
             Map(x => x.PropertyValue).Not.Nullable().Column("property_value");

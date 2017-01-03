@@ -1,4 +1,5 @@
 ﻿using Data.Enums;
+using Database;
 using Database.Models;
 using NHibernate;
 using NHibernate.Linq;
@@ -131,7 +132,7 @@ namespace Configurator
                 default:
                     return false;
             }
-        }
+        }        
     }
 }
 

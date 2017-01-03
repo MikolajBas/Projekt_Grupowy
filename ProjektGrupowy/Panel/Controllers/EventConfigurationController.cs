@@ -1,8 +1,7 @@
-﻿using Panel.Models;
+﻿using Common.Helpers;
+using Panel.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Web.Mvc;
 
 namespace Panel.Controllers
@@ -12,30 +11,23 @@ namespace Panel.Controllers
     {
         public ActionResult Index()
         {
+            int userId = UserHelper.GetUserByIdentityName(User.Identity.Name).Id;
+
+            var configs = EventConfigurationHelper.GetUserEventConfigurations(userId);
+
             var model = new EventConfigurationViewModel()
             {
-                Configurations = new List<EventConfigRow>
-                {
-                    new EventConfigRow
-                    {
-                        Id = 1,
-                        Rule = "Rule rule rule",
-                        Period = 3
-                    },
-                    new EventConfigRow
-                    {
-                        Id = 2,
-                        Rule = "Rule rule rule2",
-                        Period = 15
-                    },
-                    new EventConfigRow
-                    {
-                        Id = 3,
-                        Rule = "Rule rule rule3",
-                        Period = 31
-                    }
-                }
+                Configurations = new List<EventConfigRow>()
             };
+
+            foreach (var config in configs)
+            {
+                model.Configurations.Add(new EventConfigRow
+                {
+                    Rule = EventConfigurationHelper.FormatEventToString(config),
+                    Period = config.Period
+                });
+            }
 
             return View(model);
         }
