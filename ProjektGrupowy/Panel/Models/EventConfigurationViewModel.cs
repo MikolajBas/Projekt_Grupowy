@@ -1,6 +1,6 @@
 ﻿using Data.Data;
-using Database.Models;
 using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace Panel.Models
 {
@@ -10,7 +10,7 @@ namespace Panel.Models
 
         public List<UserDataProperty> Properties { get; set; }
 
-        public EventConfiguration CurrentConfig { get; set; }
+        public CurrentConfig CurrentConfig { get; set; }
 
         public string Response { get; set; }
     }
@@ -22,5 +22,26 @@ namespace Panel.Models
         public string Rule { get; set; }
 
         public int Period { get; set; }
+    }
+
+    public class CurrentConfig
+    {
+        public string Id { get; set; }
+
+        public IEnumerable<SelectListItem> Property { get; set; }
+
+        public IEnumerable<SelectListItem> PropertyOperator { get; set; }
+
+        public string PropertyValue { get; set; }
+
+        public IEnumerable<SelectListItem> Operator { get; set; }
+
+        public string ResultValue { get; set; }
+
+        public IEnumerable<SelectListItem> Function { get; set; }
+
+        public string Period { get; set; }
+
+        public string Template { get; set; }
     }
 }
