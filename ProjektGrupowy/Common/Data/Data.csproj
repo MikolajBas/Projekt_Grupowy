@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Data\UserDataProperty.cs" />
     <Compile Include="Enums\AccountType.cs" />
+    <Compile Include="Enums\BasicDataProperty.cs" />
     <Compile Include="Enums\LoginStatus.cs" />
     <Compile Include="Enums\PropertyType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

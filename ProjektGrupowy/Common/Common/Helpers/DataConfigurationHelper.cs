@@ -1,4 +1,5 @@
 ﻿using Data.Data;
+using Data.Enums;
 using Database;
 using Database.Models;
 using NHibernate.Linq;
@@ -9,6 +10,29 @@ namespace Common.Helpers
 {
     public static class DataConfigurationHelper
     {
+        public static string GetPropertyName(long propertyId)
+        {
+            var propertyName = string.Empty;
+
+            if (propertyId >= 0)
+            {
+                using (var session = Connector.OpenSession())
+                using (var transaction = session.BeginTransaction())
+                {
+                    var property = session.Query<DataPropertiesConfiguration>().First(x => x.Id == propertyId);
+                    propertyName = property.Name;
+
+                    transaction.Commit();
+                }
+            }
+            else
+            {
+                propertyName = ((BasicDataProperty)propertyId).ToString();
+            }
+
+            return propertyName;
+        }
+
         public static List<UserDataProperty> GetUserDataProperties(long userId)
         {
             var properties = new List<UserDataProperty>();
@@ -49,71 +73,64 @@ namespace Common.Helpers
             {
                 new UserDataProperty
                 {
-                    Id = 0,
+                    Id = -1,
                     Name = "ip",
                     IsBasic = true
                 },
                 new UserDataProperty
                 {
-                    Id = 0,
+                    Id = -2,
                     Name = "product_id",
                     IsBasic = true
                 },
                 new UserDataProperty
                 {
-                    Id = 0,
+                    Id = -3,
                     Name = "product_name",
                     IsBasic = true
                 },
                 new UserDataProperty
                 {
-                    Id = 0,
+                    Id = -4,
                     Name = "screen_resolution",
                     IsBasic = true
                 },
                 new UserDataProperty
                 {
-                    Id = 0,
+                    Id = -5,
                     Name = "agent",
                     IsBasic = true
                 },
                 new UserDataProperty
                 {
-                    Id = 0,
+                    Id = -6,
                     Name = "browser",
                     IsBasic = true
                 },
                 new UserDataProperty
                 {
-                    Id = 0,
-                    Name = "screen_resolution",
-                    IsBasic = true
-                },
-                new UserDataProperty
-                {
-                    Id = 0,
+                    Id = -7,
                     Name = "category",
                     IsBasic = true
                 },
                 new UserDataProperty
                 {
-                    Id = 0,
+                    Id = -8,
                     Name = "system",
                     IsBasic = true
                 },
                 new UserDataProperty
                 {
-                    Id = 0,
+                    Id = -9,
                     Name = "url",
                     IsBasic = true
                 },
                 new UserDataProperty
                 {
-                    Id = 0,
+                    Id = -10,
                     Name = "visit_date",
                     IsBasic = true
-                },
-
+                }
             };
         }
     }

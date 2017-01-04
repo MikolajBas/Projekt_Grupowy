@@ -1,4 +1,5 @@
 ﻿using Data.Data;
+using Database.Models;
 using System.Collections.Generic;
 
 namespace Panel.Models
@@ -8,6 +9,10 @@ namespace Panel.Models
         public List<EventConfigRow> Configurations { get; set; }
 
         public List<UserDataProperty> Properties { get; set; }
+
+        public EventConfiguration CurrentConfig { get; set; }
+
+        public string Response { get; set; }
     }
 
     public class EventConfigRow

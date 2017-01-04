@@ -44,10 +44,10 @@
     <p>Function(property [property_operator] property_value) [operator] value</p>
 </div>
 <div class="row">
-    <form>
+    <form method="POST" action="/EventConfiguration/Add">
         <div class="form-group">
             <label for="function-input">Function:</label>
-            <select class="form-control" id="function-input">
+            <select class="form-control" id="function-input" name="function">
                 <option>SUM</option>
                 <option>AVG</option>
                 <option>COUNT</option>
@@ -55,13 +55,11 @@
         </div>
         <div class="form-group">
             <label for="property-input">Property:</label>
-            <select class="form-control" id="property-input">
+            <select class="form-control" id="property-input" name="property">
                 @{
                     foreach (var property in Model.Properties)
                     {
-                        var value = property.IsBasic ? property.Name : property.Id.ToString();
-
-                        <option value="@Html.Raw(value)">
+                        <option value="@Html.Raw(property.Id)">
                             @Html.Raw(property.Name)
                         </option>
                     }
@@ -70,7 +68,7 @@
         </div>
         <div class="form-group">
             <label for="property-operator-input">Property operator:</label>
-            <select class="form-control" id="property-operator-input">
+            <select class="form-control" id="property-operator-input" name="property-operator">
                 <option>=</option>
                 <option>></option>
                 <option><</option>
@@ -78,11 +76,11 @@
         </div>
         <div class="form-group">
             <label for="property-value-operator">Property value:</label>
-            <input type="text" class="form-control" id="property-value-operator">
+            <input type="text" class="form-control" id="property-value-operator" name="property-value">
         </div>
         <div class="form-group">
             <label for="operator-input">Operator:</label>
-            <select class="form-control" id="operator-input">
+            <select class="form-control" id="operator-input" name="operator">
                 <option>=</option>
                 <option>></option>
                 <option><</option>
@@ -90,16 +88,16 @@
         </div>
         <div class="form-group">
             <label for="value-input">Value:</label>
-            <input type="text" class="form-control" id="value-input">
+            <input type="text" class="form-control" id="value-input" name="value">
         </div>
 
         <div class="form-group">
             <label for="period-input">Period (number of days):</label>
-            <input type="text" class="form-control" id="period-input">
+            <input type="text" class="form-control" id="period-input" name="period">
         </div>
         <div class="form-group">
             <label for="template-input">Template (html Code):</label>
-            <textarea class="form-control" rows="5" id="template-input"></textarea>
+            <textarea class="form-control" rows="5" id="template-input" name="template"></textarea>
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
     </form>

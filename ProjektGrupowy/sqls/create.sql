@@ -69,7 +69,7 @@ CREATE TABLE event_configurations(
    event_function VARCHAR(32),
    period INT NOT NULL,
    property_id INT NOT NULL,
-   template VARCHAR(64),
+   template VARCHAR(512),
    user_id INT NOT NULL,
    category_id INT NOT NULL,
    category VARCHAR(128) NOT NULL,
