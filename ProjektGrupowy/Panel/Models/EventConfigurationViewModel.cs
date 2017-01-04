@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Data.Data;
+using System.Collections.Generic;
 
 namespace Panel.Models
 {
@@ -6,7 +7,7 @@ namespace Panel.Models
     {
         public List<EventConfigRow> Configurations { get; set; }
 
-        public List<string> Properties { get; set; }
+        public List<UserDataProperty> Properties { get; set; }
     }
 
     public class EventConfigRow

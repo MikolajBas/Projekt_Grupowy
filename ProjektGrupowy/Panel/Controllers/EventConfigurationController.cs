@@ -17,7 +17,8 @@ namespace Panel.Controllers
 
             var model = new EventConfigurationViewModel()
             {
-                Configurations = new List<EventConfigRow>()
+                Configurations = new List<EventConfigRow>(),
+                Properties = DataConfigurationHelper.GetUserDataProperties(userId)
             };
 
             foreach (var config in configs)
