@@ -5,6 +5,7 @@ using Panel.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Panel.Controllers
@@ -20,16 +21,17 @@ namespace Panel.Controllers
 
             return View(model);
         }
-        
-        public ActionResult Add()
+
+        [HttpPost]
+        public async Task<ActionResult> Add(EventConfigurationViewModel data)
         {
             var response = string.Empty;
             try
             {
                 int userId = UserHelper.GetUserByIdentityName(User.Identity.Name).Id;
-                var config = GetEventConfigurationFromForm(userId);
+                var config = GetEventConfigurationFromForm(userId, data.CurrentConfig);
 
-                if (IsNewConfiguration())
+                if (IsNewConfiguration(data.CurrentConfig.Id))
                 {
                     EventConfigurationHelper.AddConfiguration(config);
                     response = "Event Configuration added successfully";
@@ -115,34 +117,34 @@ namespace Panel.Controllers
             return model;
         }
 
-        private bool IsNewConfiguration()
+        private bool IsNewConfiguration(string id)
         {
-            return string.IsNullOrEmpty(Request.Form["id"]);
+            return string.IsNullOrEmpty(id);
         }
 
-        private EventConfiguration GetEventConfigurationFromForm(int userId)
+        private EventConfiguration GetEventConfigurationFromForm(int userId, CurrentConfig config)
         {
-            var config = new EventConfiguration
+            var eventConfig = new EventConfiguration
             {
-                PropertyId = Convert.ToInt32(Request.Form["property"]),
-                PropertyOperator = Request.Form["property-operator"],
-                PropertyValue = Request.Form["property-value"],
-                Operator = Request.Form["operator"],
-                ResultValue = Convert.ToInt32(Request.Form["value"]),
-                Function = Request.Form["function"],
-                Period = Convert.ToInt32(Request.Form["period"]),
+                PropertyId = config.PropertyId,
+                PropertyOperator = config.PropertyOperator,
+                PropertyValue = config.PropertyValue,
+                Operator = config.Operator,
+                ResultValue = Convert.ToInt32(config.ResultValue),
+                Function = config.Function,
+                Period = Convert.ToInt32(config.Period),
                 UserId = userId,
-                Template = Request.Form["template"],
+                Template = config.Template,
                 Category = string.Empty,
                 CategoryId = 0
             };
 
-            if (!IsNewConfiguration())
+            if (!IsNewConfiguration(config.Id))
             {
-                config.Id = Convert.ToInt32(Request.Form["id"]);
+                eventConfig.Id = Convert.ToInt32(config.Id);
             }
 
-            return config;
+            return eventConfig;
         }
 
         private CurrentConfig GetCurrentConfig(EventConfiguration config, int userId)
@@ -150,18 +152,20 @@ namespace Panel.Controllers
             var operators = new List<string>() { "=", "<", ">" };
             var functions = new List<string>() { "SUM", "AVG", "COUNT" };
             var properties = DataConfigurationHelper.GetUserDataProperties(userId);
-            
+
             return new CurrentConfig
             {
                 Id = config.Id.ToString(),
-                Property =
+                PropertyId = config.PropertyId,
+                PropertyList =
                     properties.Select(x => new SelectListItem
                     {
                         Text = x.Name,
                         Value = x.Id.ToString(),
-                        Selected = x.Id == config.Id
+                        Selected = x.Id == config.PropertyId
                     }),
-                PropertyOperator =
+                PropertyOperator = config.PropertyOperator,
+                PropertyOperatorList =
                     operators.Select(x => new SelectListItem
                     {
                         Text = x,
@@ -169,7 +173,8 @@ namespace Panel.Controllers
                         Selected = x == config.PropertyOperator
                     }),
                 PropertyValue = config.PropertyValue,
-                Operator =
+                Operator = config.Operator,
+                OperatorList =
                     operators.Select(x => new SelectListItem
                     {
                         Text = x,
@@ -177,7 +182,8 @@ namespace Panel.Controllers
                         Selected = x == config.Operator
                     }),
                 ResultValue = config.ResultValue.ToString(),
-                Function =
+                Function = config.Function,
+                FunctionList =
                     functions.Select(x => new SelectListItem
                     {
                         Text = x,
@@ -198,14 +204,14 @@ namespace Panel.Controllers
             return new CurrentConfig
             {
                 Id = string.Empty,
-                Property =
+                PropertyList =
                     properties.Select(x => new SelectListItem
                     {
                         Text = x.Name,
                         Value = x.Id.ToString(),
                         Selected = x.Id == properties.First().Id
                     }),
-                PropertyOperator =
+                PropertyOperatorList =
                     operators.Select(x => new SelectListItem
                     {
                         Text = x,
@@ -213,7 +219,7 @@ namespace Panel.Controllers
                         Selected = x == operators.First()
                     }),
                 PropertyValue = string.Empty,
-                Operator =
+                OperatorList =
                     operators.Select(x => new SelectListItem
                     {
                         Text = x,
@@ -221,7 +227,7 @@ namespace Panel.Controllers
                         Selected = x == operators.First()
                     }),
                 ResultValue = string.Empty,
-                Function =
+                FunctionList =
                     functions.Select(x => new SelectListItem
                     {
                         Text = x,

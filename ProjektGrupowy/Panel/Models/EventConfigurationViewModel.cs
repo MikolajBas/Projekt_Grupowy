@@ -28,17 +28,25 @@ namespace Panel.Models
     {
         public string Id { get; set; }
 
-        public IEnumerable<SelectListItem> Property { get; set; }
+        public int PropertyId { get; set; }
 
-        public IEnumerable<SelectListItem> PropertyOperator { get; set; }
+        public IEnumerable<SelectListItem> PropertyList { get; set; }
+
+        public string PropertyOperator { get; set; }
+        
+        public IEnumerable<SelectListItem> PropertyOperatorList { get; set; }
 
         public string PropertyValue { get; set; }
 
-        public IEnumerable<SelectListItem> Operator { get; set; }
+        public string Operator { get; set; }
+
+        public IEnumerable<SelectListItem> OperatorList { get; set; }
 
         public string ResultValue { get; set; }
 
-        public IEnumerable<SelectListItem> Function { get; set; }
+        public string Function { get; set; }
+
+        public IEnumerable<SelectListItem> FunctionList { get; set; }
 
         public string Period { get; set; }
 

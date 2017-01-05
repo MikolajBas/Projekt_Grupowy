@@ -47,41 +47,42 @@
     <p>Function(property [property_operator] property_value) [operator] value</p>
 </div>
 <div class="row">
-    <form method="POST" action="/EventConfiguration/Add">
+    @using (Html.BeginForm("Add", "EventConfiguration", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
         <div class="form-group">
             <label for="function-input">Function:</label>
-            @Html.DropDownList("function", Model.CurrentConfig.Function, new { @id = "function-input", @class = "form-control" })
+            @Html.DropDownListFor(x => x.CurrentConfig.Function, Model.CurrentConfig.FunctionList, new { @id = "function-input", @class = "form-control" })
         </div>
         <div class="form-group">
             <label for="property-input">Property:</label>
-            @Html.DropDownList("property", Model.CurrentConfig.Property, new { @id = "property-input", @class = "form-control" })
+            @Html.DropDownListFor(x => x.CurrentConfig.PropertyId, Model.CurrentConfig.PropertyList, new { @id = "property-input", @class = "form-control" })
         </div>
         <div class="form-group">
             <label for="property-operator-input">Property operator:</label>
-            @Html.DropDownList("property-operator", Model.CurrentConfig.PropertyOperator, new { @id = "property-operator-input", @class = "form-control" })
+            @Html.DropDownListFor(x => x.CurrentConfig.PropertyOperator, Model.CurrentConfig.PropertyOperatorList, new { @id = "property-operator-input", @class = "form-control" })
         </div>
         <div class="form-group">
             <label for="property-value-input">Property value:</label>
-            @Html.TextBox("property-value", Model.CurrentConfig.PropertyValue, new { @id = "property-value-input", @class = "form-control" })
+            @Html.TextBoxFor(x => x.CurrentConfig.PropertyValue, new { @id = "property-value-input", @class = "form-control" })
         </div>
         <div class="form-group">
             <label for="operator-input">Operator:</label>
-            @Html.DropDownList("operator", Model.CurrentConfig.Operator, new { @id = "operator-input", @class = "form-control" })
+            @Html.DropDownListFor(x => x.CurrentConfig.Operator, Model.CurrentConfig.OperatorList, new { @id = "operator-input", @class = "form-control" })
         </div>
         <div class="form-group">
             <label for="value-input">Value:</label>
-            @Html.TextBox("value", Model.CurrentConfig.ResultValue, new { @id = "value-input", @class = "form-control" })
+            @Html.TextBoxFor(x => x.CurrentConfig.ResultValue, new { @id = "value-input", @class = "form-control" })
         </div>
         <div class="form-group">
             <label for="period-input">Period (number of days):</label>
-            @Html.TextBox("period", Model.CurrentConfig.Period, new { @id = "period-input", @class = "form-control" })
+            @Html.TextBoxFor(x => x.CurrentConfig.Period, new { @id = "period-input", @class = "form-control" })
         </div>
         <div class="form-group">
             <label for="template-input">Template (html Code):</label>
-            @Html.TextArea("template", Model.CurrentConfig.Template, new { @id = "template-input", @class = "form-control" })
+            @Html.TextAreaFor(x => x.CurrentConfig.Template, new { @id = "template-input", @class = "form-control" })
         </div>
-        @Html.Hidden("id", Model.CurrentConfig.Id);
+        @Html.HiddenFor(x => x.CurrentConfig.Id);
         <button type="submit" class="btn btn-default">Submit</button>
-    </form>
+    }
 </div>
 </div>
