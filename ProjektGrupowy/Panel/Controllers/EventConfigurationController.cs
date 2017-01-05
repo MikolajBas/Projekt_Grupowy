@@ -23,12 +23,22 @@ namespace Panel.Controllers
         
         public ActionResult Add()
         {
+            var response = string.Empty;
             try
             {
                 int userId = UserHelper.GetUserByIdentityName(User.Identity.Name).Id;
                 var config = GetEventConfigurationFromForm(userId);
 
-                EventConfigurationHelper.AddConfiguration(config);
+                if (IsNewConfiguration())
+                {
+                    EventConfigurationHelper.AddConfiguration(config);
+                    response = "Event Configuration added successfully";
+                }
+                else
+                {
+                    EventConfigurationHelper.UpdateConfiguration(config);
+                    response = "Event Configuration updated successfully";
+                }
             }
             catch (Exception ex)
             {
@@ -36,8 +46,7 @@ namespace Panel.Controllers
             }
 
             var model = GetModel();
-
-            model.Response = "Event Configuration added successfully";
+            model.Response = response;
 
             return View("Index", model);
         }
@@ -106,9 +115,14 @@ namespace Panel.Controllers
             return model;
         }
 
+        private bool IsNewConfiguration()
+        {
+            return string.IsNullOrEmpty(Request.Form["id"]);
+        }
+
         private EventConfiguration GetEventConfigurationFromForm(int userId)
         {
-            return new EventConfiguration
+            var config = new EventConfiguration
             {
                 PropertyId = Convert.ToInt32(Request.Form["property"]),
                 PropertyOperator = Request.Form["property-operator"],
@@ -122,6 +136,13 @@ namespace Panel.Controllers
                 Category = string.Empty,
                 CategoryId = 0
             };
+
+            if (!IsNewConfiguration())
+            {
+                config.Id = Convert.ToInt32(Request.Form["id"]);
+            }
+
+            return config;
         }
 
         private CurrentConfig GetCurrentConfig(EventConfiguration config, int userId)
