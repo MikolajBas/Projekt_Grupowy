@@ -1,5 +1,6 @@
 ﻿using Data.Data;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
 namespace Panel.Models
@@ -28,28 +29,45 @@ namespace Panel.Models
     {
         public string Id { get; set; }
 
+        [Required]
+        [Range(-100, int.MaxValue)]
         public int PropertyId { get; set; }
 
         public IEnumerable<SelectListItem> PropertyList { get; set; }
 
+        [Required]
+        [DataType(DataType.Text)]
         public string PropertyOperator { get; set; }
         
         public IEnumerable<SelectListItem> PropertyOperatorList { get; set; }
 
+        [Required]
+        [DataType(DataType.Text)]
         public string PropertyValue { get; set; }
 
+        [Required]
+        [DataType(DataType.Text)]
         public string Operator { get; set; }
 
         public IEnumerable<SelectListItem> OperatorList { get; set; }
 
+        [Required]
+        [Range(0, int.MaxValue)]
         public string ResultValue { get; set; }
 
+        [Required]
+        [DataType(DataType.Text)]
         public string Function { get; set; }
 
         public IEnumerable<SelectListItem> FunctionList { get; set; }
 
+        [Required]
+        [Range(1, int.MaxValue)]
         public string Period { get; set; }
 
+        [Required]
+        [AllowHtml]
+        [DataType(DataType.Html)]
         public string Template { get; set; }
     }
 }
