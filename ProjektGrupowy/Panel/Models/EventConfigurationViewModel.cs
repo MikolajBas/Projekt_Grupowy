@@ -70,5 +70,8 @@ namespace Panel.Models
         [AllowHtml]
         [DataType(DataType.Html)]
         public string Template { get; set; }
+        
+        [DataType(DataType.Text)]
+        public string TemplateProperties { get; set; }
     }
 }

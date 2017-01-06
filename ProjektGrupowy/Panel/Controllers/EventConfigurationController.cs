@@ -138,6 +138,7 @@ namespace Panel.Controllers
                 Period = Convert.ToInt32(config.Period),
                 UserId = userId,
                 Template = config.Template,
+                TemplateProperties = EventConfigurationHelper.ConvertTemplatePropertiesFromNamesToIds(config.TemplateProperties),
                 Category = string.Empty,
                 CategoryId = 0
             };
@@ -194,7 +195,8 @@ namespace Panel.Controllers
                         Selected = x == config.Function
                     }),
                 Period = config.Period.ToString(),
-                Template = config.Template
+                Template = config.Template,
+                TemplateProperties = EventConfigurationHelper.ConvertTemplatePropertiesFromIdsToNames(config.TemplateProperties)
             };
         }
 
@@ -238,7 +240,8 @@ namespace Panel.Controllers
                         Selected = x == functions.First()
                     }),
                 Period = string.Empty,
-                Template = string.Empty
+                Template = string.Empty,
+                TemplateProperties = string.Empty
             };
         }
     }

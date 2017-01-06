@@ -1,6 +1,8 @@
-﻿using Database;
+﻿using Data.Enums;
+using Database;
 using Database.Models;
 using NHibernate.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -25,6 +27,86 @@ namespace Common.Helpers
 
                 transaction.Commit();
                 return configs;
+            }
+        }
+
+        public static string ConvertTemplatePropertiesFromIdsToNames(string propertyIds)
+        {
+            if (string.IsNullOrEmpty(propertyIds))
+                return string.Empty;
+
+            using (var session = Connector.OpenSession())
+            using (var transaction = session.BeginTransaction())
+            {
+                var ids = propertyIds.Split(',');
+                var result = new List<string>();
+
+                foreach (var id in ids)
+                {
+                    var property = session.Query<DataPropertiesConfiguration>().FirstOrDefault(x => x.Id == Convert.ToInt32(id));
+                    var nameValue = string.Empty;
+
+                    if (property != null)
+                    {
+                        nameValue = property.Name.ToString();
+                    }
+                    else
+                    {
+                        try
+                        {
+                            nameValue = ((BasicDataProperty)Convert.ToInt32(id)).ToString();
+                        }
+                        catch (Exception ex)
+                        {
+                        }
+                    }
+
+                    result.Add(nameValue ?? string.Empty);
+                }
+
+                transaction.Commit();
+
+                return string.Join(",", result.ToArray());
+            }
+        }
+
+        public static string ConvertTemplatePropertiesFromNamesToIds(string propertyNames)
+        {
+            if (string.IsNullOrEmpty(propertyNames))
+                return string.Empty;
+
+            using (var session = Connector.OpenSession())
+            using (var transaction = session.BeginTransaction())
+            {
+                var names = propertyNames.Split(',');
+                var result = new List<string>();
+
+                foreach (var name in names)
+                {
+                    var property = session.Query<DataPropertiesConfiguration>().FirstOrDefault(x => x.Name == name);
+                    var idValue = string.Empty;
+
+                    if (property != null)
+                    {
+                        idValue = property.Id.ToString();
+                    }
+                    else
+                    {
+                        try
+                        {
+                            idValue = ((int)EnumHelper.ParseEnum<BasicDataProperty>(name)).ToString();
+                        }
+                        catch (Exception ex)
+                        {
+                        }
+                    }
+
+                    result.Add(idValue ?? string.Empty);
+                }
+
+                transaction.Commit();
+
+                return string.Join(",", result.ToArray());
             }
         }
 

@@ -82,6 +82,10 @@
             <label for="template-input">Template (html Code):</label>
             @Html.TextAreaFor(x => x.CurrentConfig.Template, new { @id = "template-input", @class = "form-control" })
         </div>
+        <div class="form-group">
+            <label for="template-properties-input">Template Properties (names splitted by ,):</label>
+            @Html.TextBoxFor(x => x.CurrentConfig.TemplateProperties, new { @id = "template-properties-input", @class = "form-control" })
+        </div>
         @Html.HiddenFor(x => x.CurrentConfig.Id);
         <button type="submit" class="btn btn-default">Submit</button>
     }

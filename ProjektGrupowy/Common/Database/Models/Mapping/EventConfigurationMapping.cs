@@ -19,6 +19,7 @@ namespace Database.Models.Mapping
             Map(x => x.Category).Not.Nullable().Column("category");
             Map(x => x.CategoryId).Not.Nullable().Column("category_id");
             Map(x => x.Template).Column("template");
+            Map(x => x.TemplateProperties).Column("template_properties");
             Map(x => x.UserId).Not.Nullable().Column("user_id");
         }
 

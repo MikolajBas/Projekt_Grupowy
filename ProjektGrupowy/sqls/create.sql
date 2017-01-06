@@ -70,6 +70,7 @@ CREATE TABLE event_configurations(
    period INT NOT NULL,
    property_id INT NOT NULL,
    template VARCHAR(512),
+   template_properties VARCHAR(512),
    user_id INT NOT NULL,
    category_id INT NOT NULL,
    category VARCHAR(128) NOT NULL,
