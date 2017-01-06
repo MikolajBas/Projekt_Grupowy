@@ -28,18 +28,21 @@ namespace Panel.Controllers
             var response = string.Empty;
             try
             {
-                int userId = UserHelper.GetUserByIdentityName(User.Identity.Name).Id;
-                var config = GetEventConfigurationFromForm(userId, data.CurrentConfig);
+                if (ModelState.IsValid)
+                {
+                    int userId = UserHelper.GetUserByIdentityName(User.Identity.Name).Id;
+                    var config = GetEventConfigurationFromForm(userId, data.CurrentConfig);
 
-                if (IsNewConfiguration(data.CurrentConfig.Id))
-                {
-                    EventConfigurationHelper.AddConfiguration(config);
-                    response = "Event Configuration added successfully";
-                }
-                else
-                {
-                    EventConfigurationHelper.UpdateConfiguration(config);
-                    response = "Event Configuration updated successfully";
+                    if (IsNewConfiguration(data.CurrentConfig.Id))
+                    {
+                        EventConfigurationHelper.AddConfiguration(config);
+                        response = "Event Configuration added successfully";
+                    }
+                    else
+                    {
+                        EventConfigurationHelper.UpdateConfiguration(config);
+                        response = "Event Configuration updated successfully";
+                    }
                 }
             }
             catch (Exception ex)
@@ -53,7 +56,7 @@ namespace Panel.Controllers
             return View("Index", model);
         }
 
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
             var model = GetModel();
 
@@ -72,7 +75,7 @@ namespace Panel.Controllers
             return View("Index", model);
         }
 
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             try
             {
