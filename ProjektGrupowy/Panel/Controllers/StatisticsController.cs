@@ -17,20 +17,20 @@ namespace Panel.Controllers
         public ActionResult Index()
         {
             var model = GetModel();
-            return View();
+            return View(model);
         }
 
         private StatistiscViewModel GetModel()
         {
-            int userId = UserHelper.GetUserByIdentityName(User.Identity.Name).Id;
-
             var model = new StatistiscViewModel()
             {
                 Attributes = GetAttributes(),
                 ChartTypes = GetChartTypes(),
-                CurrentAttribute = 1,
-                CurrentChartType = 1
-            };
+                CurrentAttribute = new AttributeType(1, "system"),
+                CurrentChartType = new AttributeType(1, "pie"),
+                StartDate = new DateTime(2016, 01, 01),
+                EndDate = new DateTime(2017, 01, 01)
+        };
 
             return model;
         }
@@ -39,10 +39,10 @@ namespace Panel.Controllers
         {
             return new List<AttributeType>
             {
-                new AttributeType(1, "screen_resolution"),
+                new AttributeType(1, "system"),
                 new AttributeType(2, "browser"),
                 new AttributeType(3, "agent"),
-                new AttributeType(4, "system")
+                new AttributeType(4, "screen_resolution")
             };
         }
         private static List<AttributeType> GetChartTypes()
