@@ -2,52 +2,66 @@
     ViewBag.Title = "DataConfiguration";
 }
 
-<h2>Data Configuration</h2>
-</br></br></br></br>
+<div class="form-inline">
+    <h2>Data Configuration</h2>
+    </br></br></br></br>
 
-<table style="width:100%">
-    <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>TypeId</th>
-        <th></th>
-        <th></th>
-    </tr>
-    @foreach (var configuration in @ViewBag.configurations)
-    {
+    <table style="width:100%">
         <tr>
-            <td>@configuration.Id</td>
-            <td>@configuration.Name</td>
-            <td>@configuration.TypeId</td>
-
-            <form method="POST" action="/DataConfiguration/EditData">
-                <td><input name="Submit" type="Submit" value="Edit" /></td>
-                <input name="edit" type="hidden" value=@configuration.Id />
-            </form>
-            
-            <form method="POST" action="/DataConfiguration/DeleteData">
-                <td><input name="Submit" type="Submit" value="Delete" /></td>
-                <input name="delete" type="hidden" value=@configuration.Id />
-            </form>
+            <th>Id</th>
+            <th>Name</th>
+            <th>TypeId</th>
+            <th></th>
+            <th></th>
         </tr>
-    }
-</table>
+        @foreach (var configuration in @ViewBag.configurations)
+        {
+            <tr>
+                <td>@configuration.Id</td>
+                <td>@configuration.Name</td>
+                @{int typeId = @configuration.TypeId;}
+                @{
+                    switch (typeId)
+                    {
+                        case 1:
+                            <td>Int</td>
+                            break;
+                        case 2:
+                            <td>String</td>
+                            break;
+                    }
+                }
 
-</br></br></br>
+                <td>
+                    <form method="POST" action="/DataConfiguration/EditData" style ='float: left; padding: 5px;'>
+                        <input name="Submit" type="Submit" value="Edit" class="btn btn-primary" />
+                        <input name="edit" type="hidden" value=@configuration.Id />
+                    </form>
+                    <form method="POST" action="/DataConfiguration/DeleteData" style ='float: left; padding: 5px;'>
+                        <input name="Submit" type="Submit" value="Delete" class="btn btn-primary" />
+                        <input name="delete" type="hidden" value=@configuration.Id />
+                    </form>
+                </td>
 
-<form method="POST" action="/DataConfiguration/AddConfiguration">
+            </tr>
+        }
+    </table>
 
-    Name:
-    <input type="text" name="name" value="nowy" />
-    <br />
-    Type:
-    <select name="type">
-        <option>String</option>
-        <option>Int</option>
-    </select>
-    </br></br>
-    <input value="Save" type="Submit" />
+    </br></br></br>
 
-</form>
+    <form method="POST" action="/DataConfiguration/AddConfiguration">
+        <div class="well">
+            <label for="formGroupExampleInput">Add new user</label> <br />
+            <div class="form-inline">
+                <input type="text" name="name" class="form-control" id="formGroupExampleInput" placeholder="Name">
+                <select name="type" class="form-control">
+                    <option>String</option>
+                    <option>Int</option>
+                </select>
+                <input value="Save" type="Submit" class="btn btn-primary" />
+            </div>
+        </div>
 
-</br></br></br>
+    </form>
+    </div>
+    </br></br></br>
