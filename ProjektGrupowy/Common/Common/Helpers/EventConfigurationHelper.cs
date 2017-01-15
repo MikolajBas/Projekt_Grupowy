@@ -24,7 +24,6 @@ namespace Common.Helpers
             using (var transaction = session.BeginTransaction())
             {
                 var configs = session.Query<EventConfiguration>().Where(x => x.UserId == userId).ToList();
-
                 transaction.Commit();
                 return configs;
             }
