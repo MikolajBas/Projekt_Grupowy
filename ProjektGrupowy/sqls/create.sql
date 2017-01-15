@@ -2,14 +2,14 @@ CREATE DATABASE IF NOT EXISTS pgdb;
 
 USE pgdb;
 
-DROP TABLE IF EXISTS `data_properties`;
 DROP TABLE IF EXISTS `event_logs`;
-DROP TABLE IF EXISTS `event_configuration_properties`;
-DROP TABLE IF EXISTS `event_configurations`;
-DROP TABLE IF EXISTS `data_property_configurations`;
-DROP TABLE IF EXISTS `sites_data`;
 DROP TABLE IF EXISTS `notifications`;
 DROP TABLE IF EXISTS `notification_configurations`;
+DROP TABLE IF EXISTS `data_properties`;
+DROP TABLE IF EXISTS `data_property_configurations`;
+DROP TABLE IF EXISTS `sites_data`;
+DROP TABLE IF EXISTS `event_configuration_properties`;
+DROP TABLE IF EXISTS `event_configurations`;
 DROP TABLE IF EXISTS `users`;
 
 CREATE TABLE users(
