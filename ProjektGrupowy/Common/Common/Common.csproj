@@ -51,6 +51,7 @@
     <Compile Include="Helpers\DataConfigurationHelper.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\EventConfigurationHelper.cs" />
+    <Compile Include="Helpers\StatisticsHelper.cs" />
     <Compile Include="Helpers\TextHelper.cs" />
     <Compile Include="Managers\AccountManager.cs" />
     <Compile Include="Helpers\UserHelper.cs" />
