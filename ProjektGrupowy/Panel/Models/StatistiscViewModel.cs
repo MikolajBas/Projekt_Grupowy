@@ -16,6 +16,9 @@ namespace Panel.Models
         public AttributeType CurrentChartType;
         public AttributeType CurrentAttribute;
 
+        public List<String> Labels;
+        public List<int> CountedData;
+
         [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
 

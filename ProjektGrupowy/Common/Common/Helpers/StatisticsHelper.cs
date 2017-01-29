@@ -19,7 +19,7 @@ namespace Common.Helpers
 
     public static class StatisticsHelper
     {
-        public static IList<SiteCount> GetSitesStatistics(string parameterName, int userId, DateTime startDate, DateTime endDate)
+        public static List<SiteCount> GetSitesStatistics(string parameterName, int userId, DateTime startDate, DateTime endDate)
         {
             using (var session = Connector.OpenSession())
             using (var transaction = session.BeginTransaction())
@@ -35,7 +35,7 @@ namespace Common.Helpers
 
                 transaction.Commit();
 
-                return records;
+                return records.ToList();
             }
         }
     }

@@ -30,12 +30,12 @@ namespace Panel.Controllers
                 CurrentChartType = new AttributeType(1, "pie"),
                 StartDate = new DateTime(2016, 01, 01),
                 EndDate = new DateTime(2017, 01, 01)
-        };
+            };
 
             return model;
         }
 
-        private static List<AttributeType> GetAttributes()
+        private List<AttributeType> GetAttributes()
         {
             return new List<AttributeType>
             {
@@ -45,7 +45,7 @@ namespace Panel.Controllers
                 new AttributeType(4, "screen_resolution")
             };
         }
-        private static List<AttributeType> GetChartTypes()
+        private List<AttributeType> GetChartTypes()
         {
             return new List<AttributeType>
             {
@@ -54,6 +54,16 @@ namespace Panel.Controllers
                 new AttributeType(3, "bar"),
                 new AttributeType(4, "doughnut")
             };
+        }
+        
+        private List<String> GetLabels(List<SiteCount> filteredData)
+        {
+            return filteredData.Select(x => x.Name).ToList();
+        }
+
+        private List<int> GetData(List<SiteCount> filteredData)
+        {
+            return filteredData.Select(x => x.Count).ToList();
         }
     }
 }
