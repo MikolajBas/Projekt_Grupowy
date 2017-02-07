@@ -1,6 +1,7 @@
 ﻿using Common.Helpers;
 using Database.Models;
 using Panel.Models;
+using Common.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,45 +15,68 @@ namespace Panel.Controllers
     [Authorize]
     public class StatisticsController : Controller
     {
+        private readonly Logger _logger = new Logger("StatisticsController");
+
         public ActionResult Index()
         {
             var model = GetModel();
-            return View(model);
+            return View("Index", model);
+        }
+
+        [HttpPost]
+        public JsonResult Statistics(StatistiscViewModel model)
+        {
+
+            int userId = UserHelper.GetUserByIdentityName(User.Identity.Name).Id;
+            List<SiteCount> data = StatisticsHelper.GetSitesStatistics(
+               model.CurrentAttribute, userId, model.StartDate, model.EndDate);
+            //StatisticsHelper.GetSitesStatistics(
+              //  "system", 0, new DateTime(2016,1,1), new DateTime(2016, 12, 12));
+            model.Labels = GetLabels(data);
+            model.CountedData = GetData(data);
+            model.Attributes = GetAttributes();
+            model.ChartTypes = GetChartTypes();
+
+           // return View("Index", model);
+            return Json(new { labels = model.Labels, countedData = model.CountedData});
         }
 
         private StatistiscViewModel GetModel()
         {
             var model = new StatistiscViewModel()
             {
+                //Chosen = new Models.Attribute(GetAttributes(), new AttributeType(0, "system")),
                 Attributes = GetAttributes(),
                 ChartTypes = GetChartTypes(),
-                CurrentAttribute = new AttributeType(1, "system"),
-                CurrentChartType = new AttributeType(1, "pie"),
+                CurrentAttribute = "system",
+                CurrentChartType = "pie",
                 StartDate = new DateTime(2016, 01, 01),
-                EndDate = new DateTime(2017, 01, 01)
+                EndDate = new DateTime(2017, 01, 01),
+                Labels = null,
+                CountedData = null
             };
 
             return model;
         }
 
-        private List<AttributeType> GetAttributes()
+        private List<SelectListItem> GetAttributes()
         {
-            return new List<AttributeType>
+             return new List<SelectListItem>
             {
-                new AttributeType(1, "system"),
-                new AttributeType(2, "browser"),
-                new AttributeType(3, "agent"),
-                new AttributeType(4, "screen_resolution")
+                new SelectListItem() { Value = "System", Text  = "system"},
+                new SelectListItem() { Value = "Browser", Text = "browser" },
+                new SelectListItem() { Value = "Agent", Text = "agent" },
+                new SelectListItem() { Value = "ScreenResolution", Text = "screen resolution" }
             };
         }
-        private List<AttributeType> GetChartTypes()
+        private List<SelectListItem> GetChartTypes()
         {
-            return new List<AttributeType>
+            return new List<SelectListItem>
             {
-                new AttributeType(1, "pie"),
-                new AttributeType(2, "radar"),
-                new AttributeType(3, "bar"),
-                new AttributeType(4, "doughnut")
+                new SelectListItem() { Value = "pie", Text  = "pie"},
+                new SelectListItem() { Value = "radar", Text = "radar" },
+                new SelectListItem() { Value = "bar", Text = "bar" },
+                new SelectListItem() { Value = "doughnut", Text = "doughnut" }
             };
         }
         
