@@ -38,19 +38,9 @@
     </div>
     <div class="row">
         <table class="table">
-            <thead class="thead-inverse">
-                <tr>
-                    <th>Mac osx</th>
-                    <th>Linux</th>
-                    <th>Windows</th>
-                </tr>
+            <thead class="thead-inverse" id="table_labels">
             </thead>
-            <tbody>
-                <tr>
-                    <td>12</td>
-                    <td>19</td>
-                    <td>13</td>
-                </tr>
+            <tbody id="table_data">
             </tbody>
         </table>
     </div>
@@ -83,6 +73,18 @@
                 }
 
             });
+            $("#table_labels").empty();
+            $("#table_data").empty();
+            var head_row = $("#table_labels").append("<tr></tr>");
+            var body_row = $("#table_data").append("<tr></tr>");
+            for (var i = 0; i < json.labels.length; i++) {
+                head_row.append("<th>" + json.labels[i] + "</th>");
+            }
+            for (var i = 0; i < json.labels.length; i++) {
+                body_row.append("<td>" + json.countedData[i] + "</td>");
+            }
+
+
             }
      </script>
 }
