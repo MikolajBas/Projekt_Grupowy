@@ -28,29 +28,6 @@ namespace Panel.Models
         public DateTime EndDate { get; set; }
     }
 
-    public class FormModel
-    {
-        public Attribute Chosen { get; set; }
-
-        public DateTime StartDate { get; set; }
-
-       public DateTime EndDate { get; set; }
-    }
-
-    //public class Attribute
-    //{
-    //    public SelectList AttributesList { get; set; }
-    //    public AttributeType CurrentAttribute { get; set; }
-
-    //    public Attribute(SelectList AttributesList, AttributeType CurrentAttribute)
-    //    {
-    //        this.AttributesList = AttributesList;
-    //        this.CurrentAttribute = CurrentAttribute;
-    //    }
-
-    //    public Attribute(){}
-    //}
-
     public class AttributeType
     {
         public int Id { get; set; }

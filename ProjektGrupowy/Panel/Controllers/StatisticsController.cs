@@ -30,22 +30,17 @@ namespace Panel.Controllers
             int userId = UserHelper.GetUserByIdentityName(User.Identity.Name).Id;
             List<SiteCount> data = StatisticsHelper.GetSitesStatistics(
                model.CurrentAttribute, userId, model.StartDate, model.EndDate);
-            //StatisticsHelper.GetSitesStatistics(
-              //  "system", 0, new DateTime(2016,1,1), new DateTime(2016, 12, 12));
             model.Labels = GetLabels(data);
             model.CountedData = GetData(data);
             model.Attributes = GetAttributes();
             model.ChartTypes = GetChartTypes();
-
-           // return View("Index", model);
-            return Json(new { labels = model.Labels, countedData = model.CountedData});
+            return Json(new { labels = model.Labels, countedData = model.CountedData, chartType = model.CurrentChartType});
         }
 
         private StatistiscViewModel GetModel()
         {
             var model = new StatistiscViewModel()
             {
-                //Chosen = new Models.Attribute(GetAttributes(), new AttributeType(0, "system")),
                 Attributes = GetAttributes(),
                 ChartTypes = GetChartTypes(),
                 CurrentAttribute = "system",

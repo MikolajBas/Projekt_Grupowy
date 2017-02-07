@@ -9,7 +9,6 @@
     <p id="aaa">Statistics of user @User.Identity.Name</p>
 
     <div class="row">
-        @*@using (Html.BeginForm("Statistics", "Statistics", FormMethod.Post, new { @id = "myform", @class = "form-horizontal", role = "form" }))*@
         @using (Ajax.BeginForm("Statistics", "Statistics", new AjaxOptions(){
             OnSuccess = "showStatistics"
         }, new { @id = "myform", @class = "form-horizontal", role = "form" }))
@@ -30,11 +29,8 @@
                 <label for="operator-input">Filter by attribute:</label>
                 @Html.DropDownListFor(model => model.CurrentAttribute, Model.Attributes, new { @class = "form-control" })
             </div>
-            //<button type="submit" class="btn btn-default">Submit</button>
             <input type="submit" value="Submit">
-//            <input type="submit" value="Submit" style="visibility:hidden">
 
-            //<button onclick="showStatistics()" class="btn btn-default">Show Statistics</button>
         }
 </div>
     <div class="row" style="width:500px; height:500px;">
@@ -68,10 +64,10 @@
             if (myChart != null) {
                 myChart.destroy();
             }
-            var chartType = $("#type-input option:selected").text();
+            var chartType = json.chartType;//$("#type-input option:selected").text();
             var ctx = document.getElementById('myChart').getContext('2d');
             myChart = new Chart(ctx, {
-                type: "pie",
+                type: chartType,
                 data: {
                     labels: json.labels,
                     datasets: [{
@@ -87,28 +83,6 @@
                 }
 
             });
-                /*
-                if (myChart != null) {
-                    myChart.destroy();
-                }
-                var chartType = $("#type-input option:selected").text();
-                var ctx = document.getElementById('myChart').getContext('2d');
-                myChart = new Chart(ctx, {
-                    type: chartType,
-                    data: {
-                        labels: ["linux", "mac osx", "windows"],
-                        datasets: [{
-                            backgroundColor: [
-                              "#2ecc71",
-                              "#3498db",
-                              "#95a5a6"
-                            ],
-                            data: [12, 19, 3]
-                        }]
-                    }
-
-                });
-                */
             }
      </script>
 }
