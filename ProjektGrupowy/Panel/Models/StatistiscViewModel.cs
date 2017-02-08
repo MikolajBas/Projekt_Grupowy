@@ -3,22 +3,24 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Panel.Models
 { 
     public class StatistiscViewModel
     {
 
-        public List<AttributeType> Attributes { get; set; }
+        public new List<SelectListItem> Attributes { get; set; }
+        //public Attribute Chosen { get; set; }
 
-        public List<AttributeType> ChartTypes { get; set; }
+        public List<SelectListItem> ChartTypes { get; set; }
 
-        public AttributeType CurrentChartType;
-        public AttributeType CurrentAttribute;
+        public string CurrentChartType { get; set; }
+        public string CurrentAttribute { get; set; }
 
-        public List<String> Labels;
-        public List<int> CountedData;
-
+        public List<String> Labels { get; set; }
+        public List<int> CountedData { get; set; }
+    
         [DataType(DataType.Date)]
         public DateTime StartDate { get; set; }
 

@@ -9,42 +9,38 @@
     <p id="aaa">Statistics of user @User.Identity.Name</p>
 
     <div class="row">
-        <div class="form-group">
-            <label for="type-input">Chart type:</label>
-            @Html.DropDownListFor(x => x.CurrentChartType.Id, new SelectList(Model.ChartTypes, "Id", "Name"), new { @id = "type-input", @class = "form-control" })
-        </div>
-        <div class="form-group">
-            <label for="start-input">Start date:</label>
-            @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-        <div class="form-group">
-            <label for="end-input">End date:</label>
-            @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-        <div class="form-group">
-            <label for="attribute-input">Filter by attribute:</label>
-            @Html.DropDownListFor(x => x.CurrentAttribute.Id, new SelectList(Model.Attributes, "Id", "Name"), new { @id = "operator-input", @class = "form-control" })
-        </div>
-        <button onclick="showStatistics()" type="submit" class="btn btn-default">Show Statistics</button>
-    </div>
+        @using (Ajax.BeginForm("Statistics", "Statistics", new AjaxOptions(){
+            OnSuccess = "showStatistics"
+        }, new { @id = "myform", @class = "form-horizontal", role = "form" }))
+        {
+            <div class="form-group">
+                <label for="type-input">Chart type:</label>
+                @Html.DropDownListFor(model => model.CurrentChartType, Model.ChartTypes, new { @id = "type-input", @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="start-input">Start date:</label>
+                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="form-group">
+                <label for="end-input">End date:</label>
+                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="form-group">
+                <label for="operator-input">Filter by attribute:</label>
+                @Html.DropDownListFor(model => model.CurrentAttribute, Model.Attributes, new { @class = "form-control" })
+            </div>
+            <input type="submit" value="Submit">
+
+        }
+</div>
     <div class="row" style="width:500px; height:500px;">
         <canvas id="myChart"></canvas>
     </div>
     <div class="row">
         <table class="table">
-            <thead class="thead-inverse">
-                <tr>
-                    <th>Mac osx</th>
-                    <th>Linux</th>
-                    <th>Windows</th>
-                </tr>
+            <thead class="thead-inverse" id="table_labels">
             </thead>
-            <tbody>
-                <tr>
-                    <td>12</td>
-                    <td>19</td>
-                    <td>13</td>
-                </tr>
+            <tbody id="table_data">
             </tbody>
         </table>
     </div>
@@ -53,27 +49,42 @@
 @section scripts{
     <script type="text/javascript" language="javascript">
         var myChart = null;
-        function showStatistics() {
-                if (myChart != null) {
-                    myChart.destroy();
+
+        function showStatistics(json) {
+            if (myChart != null) {
+                myChart.destroy();
+            }
+            var chartType = json.chartType;//$("#type-input option:selected").text();
+            var ctx = document.getElementById('myChart').getContext('2d');
+            myChart = new Chart(ctx, {
+                type: chartType,
+                data: {
+                    labels: json.labels,
+                    datasets: [{
+                        backgroundColor: [
+                            "#2ecc71",
+                            "#3498db",
+                            "#95a5a6",
+                            "#ff66ff",
+                            "#660000"
+                        ],
+                        data: json.countedData
+                    }]
                 }
-                var chartType = $("#type-input option:selected").text();
-                var ctx = document.getElementById('myChart').getContext('2d');
-                myChart = new Chart(ctx, {
-                    type: chartType,
-                    data: {
-                        labels: ["linux", "mac osx", "windows"],
-                        datasets: [{
-                            backgroundColor: [
-                              "#2ecc71",
-                              "#3498db",
-                              "#95a5a6"
-                            ],
-                            data: [12, 19, 3]
-                        }]
-                    }
-                });
+
+            });
+            $("#table_labels").empty();
+            $("#table_data").empty();
+            var head_row = $("#table_labels").append("<tr></tr>");
+            var body_row = $("#table_data").append("<tr></tr>");
+            for (var i = 0; i < json.labels.length; i++) {
+                head_row.append("<th>" + json.labels[i] + "</th>");
+            }
+            for (var i = 0; i < json.labels.length; i++) {
+                body_row.append("<td>" + json.countedData[i] + "</td>");
+            }
+
+
             }
      </script>
 }
-
