@@ -33,11 +33,6 @@ namespace Panel.Controllers
             return View("Index");
         }
 
-        public ActionResult EditData()
-        {
-            return View();
-        }
-
         public ActionResult DeleteData()
         {
             int id;
@@ -45,6 +40,35 @@ namespace Panel.Controllers
 
             Configurator.DataConfigurator dataConfigurator = new Configurator.DataConfigurator();
             dataConfigurator.DeleteData(id);
+
+            int userId = UserHelper.GetUserByIdentityName(User.Identity.Name).Id;
+
+            List<DataPropertiesConfiguration> dataPropertiesConfiguration = dataConfigurator.GetUserConfigurations(userId);
+            ViewBag.configurations = dataPropertiesConfiguration;
+
+            return View("Index");
+        }
+
+        public ActionResult EditData()
+        {
+            int id;
+            int type;
+
+            int.TryParse(Request.Form["id"], out id);
+            var name = string.Format("{0}", Request.Form["name"]);
+            var typeString = string.Format("{0}", Request.Form["type"]);
+
+            if (typeString =="Int")
+            {
+                type = 1;
+            }
+            else
+            {
+                type = 2;
+            }
+
+            Configurator.DataConfigurator dataConfigurator = new Configurator.DataConfigurator();
+            dataConfigurator.EditData(id, name, type);
 
             int userId = UserHelper.GetUserByIdentityName(User.Identity.Name).Id;
 

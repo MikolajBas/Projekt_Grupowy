@@ -96,15 +96,16 @@ namespace Configurator
             //return configurations;
         }
 
-        public void EditData()
+        public void EditData(int id, string name, int type)
         {
             var configurations = new List<DataPropertiesConfiguration>();
 
             using (var session = Connector.OpenSession())
             using (var transaction = session.BeginTransaction())
             {
-                configurations = session.Query<DataPropertiesConfiguration>().ToList();
-                //configurations = session.QueryOver<DataPropertiesConfiguration>().Where(c => c.UserId == userId).List();
+                var configuration = session.Query<DataPropertiesConfiguration>().Where(x => x.Id == id).ToList();
+                configuration[0].Name = name;
+                configuration[0].TypeId = type;
                 transaction.Commit();
             }
 
